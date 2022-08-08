@@ -1,7 +1,9 @@
 <template>
   <div id="register" class="text-center">
     <form class="form-register" @submit.prevent="register">
-      <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
+      <h1 class="h3 mb-3 font-weight-normal">Welcome To Pet Play Pals!</h1>
+      <img src="..\assets\PawPrint.png">
+      <h2>Register your account to find play dates now.</h2>
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
@@ -15,6 +17,7 @@
         required
         autofocus
       />
+      <br>
       <label for="password" class="sr-only">Password</label>
       <input
         type="password"
@@ -24,6 +27,8 @@
         v-model="user.password"
         required
       />
+      <br>
+       <label for="password" class="sr-only">Confirm Password</label>
       <input
         type="password"
         id="confirmPassword"
@@ -32,19 +37,27 @@
         v-model="user.confirmPassword"
         required
       />
-      <router-link :to="{ name: 'login' }">Have an account?</router-link>
+      <br>
+      <pet-register/>
+      <br>
       <button class="btn btn-lg btn-primary btn-block" type="submit">
         Create Account
       </button>
+      <br>
+        <router-link :to="{ name: 'login' }">Have an account?</router-link>
     </form>
   </div>
 </template>
 
 <script>
 import authService from '../services/AuthService';
+import petRegister from '../components/PetRegister.vue';
 
 export default {
   name: 'register',
+  components:{
+    petRegister
+  },
   data() {
     return {
       user: {
@@ -90,4 +103,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+body{
+  text-align: center;
+}
+</style>

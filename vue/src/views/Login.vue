@@ -1,7 +1,9 @@
 <template>
   <div id="login" class="text-center">
     <form class="form-signin" @submit.prevent="login">
-      <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
+      <h1 class="h3 mb-3 font-weight-normal">Welcome To Pet Play Pals</h1>
+      <img src="..\assets\PawPrint.png">
+      <h2> Please Sign In To Get Started</h2>
       <div
         class="alert alert-danger"
         role="alert"
@@ -22,6 +24,7 @@
         required
         autofocus
       />
+      <br>
       <label for="password" class="sr-only">Password</label>
       <input
         type="password"
@@ -31,7 +34,9 @@
         v-model="user.password"
         required
       />
-      <router-link :to="{ name: 'register' }">Need an account?</router-link>
+      <br>
+      <router-link :to="{ name: 'register' }">Not yet a member? Click here to register.</router-link>
+      <br>
       <button type="submit">Sign in</button>
     </form>
   </div>
@@ -74,3 +79,10 @@ export default {
   }
 };
 </script>
+<style>
+body{
+  text-align: center;
+}
+
+</style>
+
