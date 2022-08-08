@@ -24,6 +24,27 @@ CREATE TABLE users (
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
 )
 
+CREATE TABLE pets (
+	pet_id int IDENTITY NOT NULL,
+	name varchar(50) NOT NULL,
+	age varchar(50) NOT NULL,
+	size varchar(50) NOT NULL,
+	breed varchar(50) NOT NULL,
+	temperament varchar(50) NOT NULL,
+	energy varchar(50) NOT NULL, 
+	bio varchar(200) NOT NULL,
+	CONSTRAINT PK_pet PRIMARY KEY (pet_id)
+)
+CREATE TABLE user_pet
+(
+user_id INT,
+pet_id INT,
+CONSTRAINT FK_user_up FOREIGN KEY (user_id) REFERENCES users(user_id),
+CONSTRAINT FK_pet_up FOREIGN KEY (pet_id) REFERENCES pets(pet_id)
+);
+
+
+
 --populate default data
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('user','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user');
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
