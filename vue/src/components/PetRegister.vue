@@ -13,21 +13,42 @@
        <label for="petAge" class="sr-only">Pet Age: </label>
         <select name="petAge" id="petAge" v-model="pet.age">
         <option disabled value = ""> Please Select one </option>
-        <option value="puppy">Puppy (under 1 Year)</option>
+        <option value="puppy">Puppy (under 1 year)</option>
         <option value="adult">Adult (1 to 9 years)</option>
-        <option value="mercedes">Mercedes</option>
-        <option value="audi">Audi</option>
+        <option value="senior">Senior (10 to 13 years</option>
+        <option value="geriatric">Geriatric (14 plus years)</option>
         
     </select>
     <br>
           <label for="petSize" class="sr-only">Pet Size: </label>
         <select name="petSize" id="petSize" v-model="pet.size">
         <option disabled value = ""> Please Select one </option>
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="mercedes">Mercedes</option>
-        <option value="audi">Audi</option>
+        <option value="mini">Mini (under 10lbs)</option>
+        <option value="small">Small (11 to 20lbs) </option>
+        <option value="medium">Medium (21 to 50lbs)</option>
+        <option value="large">Large (greater than 50lbs)</option>
         
+       
+    </select>
+       <br>
+          <label for="petBreed" class="sr-only">Pet Breed: </label>
+        <select name="petBreed" id="petBreed" v-model="pet.breed"> 
+        <option disabled value = ""> Please Select one </option>
+        <option
+      v-for="breed in $store.state.dogBreeds"
+      v-bind:key="breed.id">
+      {{breed}}
+    </option>
+    </select>
+      <br>
+          <label for="petTemperament" class="sr-only">Pet Temperament: </label>
+        <select name="petTemperament" id="petTemperament" v-model="pet.temperament"> 
+        <option disabled value = ""> Please Select one </option>
+        <option
+      v-for="temperament in $store.state.petTemperament"
+      v-bind:key="temperament.id">
+      {{temperament}}
+    </option>
     </select>
 
 
