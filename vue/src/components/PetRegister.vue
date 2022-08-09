@@ -1,5 +1,5 @@
 <template>
-<form class="form-register" @submit.prevent="register">
+<form  class="form-register" @submit.prevent="register" >
     <h4>Please Enter Your Pet's Information To Register Them:</h4>
      <label for="petName" class="sr-only">Pet Name: </label>
       <input
@@ -14,20 +14,20 @@
        <label for="petAge" class="sr-only">Pet Age:  </label>
         <select name="petAge" id="petAge" v-model="pet.age">
         <option disabled value = ""> Please Select one </option>
-        <option value="puppy">Puppy (under 1 year)</option>
-        <option value="adult">Adult (1 to 9 years)</option>
-        <option value="senior">Senior (10 to 13 years</option>
-        <option value="geriatric">Geriatric (14 plus years)</option>
+        <option value="Puppy">Puppy (under 1 year)</option>
+        <option value="Adult">Adult (1 to 9 years)</option>
+        <option value="Senior">Senior (10 to 13 years</option>
+        <option value="Geriatric">Geriatric (14 plus years)</option>
         
     </select>
     <br>
           <label for="petSize" class="sr-only">Pet Size: </label>
         <select name="petSize" id="petSize" v-model="pet.size">
         <option disabled value = ""> Please Select one </option>
-        <option value="mini">Mini (under 10lbs)</option>
-        <option value="small">Small (11 to 20lbs) </option>
-        <option value="medium">Medium (21 to 50lbs)</option>
-        <option value="large">Large (greater than 50lbs)</option>
+        <option value="Mini">Mini (under 10lbs)</option>
+        <option value="Small">Small (11 to 20lbs) </option>
+        <option value="Medium">Medium (21 to 50lbs)</option>
+        <option value="Large">Large (greater than 50lbs)</option>
         
        
     </select>
@@ -43,7 +43,7 @@
     </select>
       <br>
       <div id="petTemperamentSection">
-        <label for="petTemperament" class="sr-only">Pet Temperament: </label>
+        <label id="temperamentLabel" for="petTemperament" class="sr-only">Pet Temperament: </label>
           <multiselect id ="multiselectTempDropdown"
            @select="changingArrayToString"
           v-model="temperamentArray"
@@ -68,13 +68,21 @@
     </select>
     </div>
     <br>
-    <label for="petBio">Enter Pet Bio Here:</label>
+    <label for="petBio">Enter Pet Bio Here: </label>
 
 <textarea id="petBio" name="petBio" v-model="pet.bio">
 </textarea>
-
-
+ 
+<div id= "addPetSection">
+      <p>Click here add another pet:</p>
+      <div v-on:click="showadditionalForm">
+      <img id = "addPetIcon"  src="https://cdn-icons-png.flaticon.com/512/16/16057.png"/>
+      </div>
+      </div>
 </form>
+
+
+      
   
 </template>
 
@@ -94,7 +102,9 @@ data(){
             temperament: "",
             energy:"",
             bio:""
-        }
+        },
+        showPetForm: false
+       
        
     }
 
@@ -103,6 +113,9 @@ methods:{
     changingArrayToString(){
         this.pet.temperament=this.temperamentArray.toString();
         console.log(this.pet.temperament);
+    },
+    showadditionalForm(){
+        this.showPetForm = !this.showPetForm ;
     }
 }
 }
@@ -113,12 +126,16 @@ methods:{
 </style>
 <style>
 .multiselect{
-width:40%;
+width:20%;
 color:#878357;
+margin-right: 5px;
 }
+
+
 #petTemperamentSection{
     display:flex;
-    justify-content: flex-end;
+    justify-content: center;
+    
 }
 
 </style>

@@ -7,7 +7,7 @@
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
-      <label for="username" class="sr-only">Username</label>
+      <label for="username" class="sr-only">Username: </label>
       <input
         type="text"
         id="username"
@@ -18,7 +18,7 @@
         autofocus
       />
       <br>
-      <label for="password" class="sr-only">Password</label>
+      <label for="password" class="sr-only">Password: </label>
       <input
         type="password"
         id="password"
@@ -28,7 +28,7 @@
         required
       />
       <br>
-       <label for="password" class="sr-only">Confirm Password</label>
+       <label for="password" class="sr-only">Confirm Password: </label>
       <input
         type="password"
         id="confirmPassword"
@@ -40,9 +40,14 @@
       <br>
       <div id= "addPetSection">
       <p>Click here to register a pet:</p>
-      <img id = "addPetIcon" src="https://cdn-icons-png.flaticon.com/512/16/16057.png">
+      <div v-on:click="clickImage">
+      <img id = "addPetIcon"  src="https://cdn-icons-png.flaticon.com/512/16/16057.png"/>
       </div>
+      </div>
+
+      <div v-if="showForm">
       <pet-register/>
+      </div>
       
       <br>
       <button class="btn btn-lg btn-primary btn-block" type="submit">
@@ -73,6 +78,7 @@ export default {
       },
       registrationErrors: false,
       registrationErrorMsg: 'There were problems registering this user.',
+      showForm: false
     };
   },
   methods: {
@@ -104,6 +110,9 @@ export default {
       this.registrationErrors = false;
       this.registrationErrorMsg = 'There were problems registering this user.';
     },
+    clickImage() {
+      this.showForm = !this.showForm ;
+    }
   },
 };
 </script>
