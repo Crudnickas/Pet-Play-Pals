@@ -1,7 +1,7 @@
 <template>
   <div id="login" class="text-center">
     <form class="form-signin" @submit.prevent="login">
-      <h1 class="h3 mb-3 font-weight-normal">Welcome To Pet Play Pals</h1>
+      <h1 class="h3 mb-3 font-weight-normal">Welcome To Pet Play Pals!</h1>
       <img src="..\assets\PawPrint.png">
       <h2> Please Sign In To Get Started</h2>
       <div
