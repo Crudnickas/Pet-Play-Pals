@@ -1,9 +1,11 @@
 <template>
+  <div class="main">
+  <div v-if="showForm" class="menu"><h1>HELLO MENU!</h1></div>
   <div class="home">
     <div id="menu-user-profile">
     
     <div id="menu">
-    <img src="..\assets\hamburger-menu-icon.png" id="menu-icon">
+    <img v-on:click="showHideMenu" src="..\assets\hamburger-menu-icon.png" id="menu-icon">
     </div>
 
     <div id="user-profile">
@@ -12,6 +14,7 @@
     </div>
     </div>
 
+    
     <h1 class="h3 mb-3 font-weight-normal">Welcome To Pet Play Pals!</h1>
     
     <img src="..\assets\PawPrint.png" id="paw-print"><br>
@@ -22,11 +25,12 @@
     </div>
     
     <div id="scheduled-playdates">
-      <scheduled-play-dates/>
+    <scheduled-play-dates/>
     </div>
     
     </div>
     <!-- <p>You must be authenticated to see this</p> -->
+  </div>
   </div>
 </template>
 
@@ -36,14 +40,39 @@ import ScheduledPlayDates from '../components/ScheduledPlayDates.vue';
 
 export default {
   name: "home",
+  data() {
+    return {
+      showForm: false
+      }
+    },
   components: {
     RegisteredPets,
     ScheduledPlayDates
   },
+  methods: {
+    showHideMenu() {
+      this.showForm = !this.showForm;
+    }
+  }
 };
 </script>
 
 <style>
+#app > div.main {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+    grid-template-areas:
+    "menu home";
+}
+
+#menu {
+  grid-area: menu;
+}
+
+#home {
+  grid-area: home;
+}
+
 #menu-user-profile {
   display: flex;
   justify-content: space-between;
