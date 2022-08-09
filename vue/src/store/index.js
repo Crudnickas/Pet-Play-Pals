@@ -19,7 +19,11 @@ if(currentToken != null) {
 export default new Vuex.Store({
   state: {
     token: currentToken || '',
-    user: currentUser || {}
+    user: currentUser || {},
+    dogBreeds: ["Australian Shepherd", "Beagle", "Bernese Mountain Dog","Boston Terrier","Boxer","Bulldog","Cane Corso","Cavalier King Charles Spaniel","Dachshund","Doberman Pinscher","French Bulldog","German Shepherd Dog","Golden Retriever","Great Dane","Havanese","Labrador Retriever","Miniature Schnauzer","Pembroke Welsh Corgi","Pointer (German Shorthaired)","Pomeranian","Poodle","Rottweiler","Shih Tzu","Siberian Huskie","Yorkshire Terrier"],
+    petTemperament: ["Aggressive","Anxious","Bold","Calm","Friendly","Impulsive","Independent", "Naughty","Neutral","Passive", "Playful", "Timid" ],
+
+    petEnergy: ["Low", "Medium", "High"]
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -37,6 +41,6 @@ export default new Vuex.Store({
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};
-    }
+    },
   }
 })

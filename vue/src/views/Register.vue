@@ -2,12 +2,12 @@
   <div id="register" class="text-center">
     <form class="form-register" @submit.prevent="register">
       <h1 class="h3 mb-3 font-weight-normal">Welcome To Pet Play Pals!</h1>
-      <img src="..\assets\PawPrint.png">
+      <img  src="..\assets\PawPrint.png" id = "paw-print">
       <h2>Register your account to find play dates now.</h2>
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
-      <label for="username" class="sr-only">Username</label>
+      <label for="username" class="sr-only">Username: </label>
       <input
         type="text"
         id="username"
@@ -18,7 +18,7 @@
         autofocus
       />
       <br>
-      <label for="password" class="sr-only">Password</label>
+      <label for="password" class="sr-only">Password: </label>
       <input
         type="password"
         id="password"
@@ -28,7 +28,7 @@
         required
       />
       <br>
-       <label for="password" class="sr-only">Confirm Password</label>
+       <label for="password" class="sr-only">Confirm Password: </label>
       <input
         type="password"
         id="confirmPassword"
@@ -38,7 +38,17 @@
         required
       />
       <br>
+      <div id= "addPetSection">
+      <p>Click here to register a pet:</p>
+      <div v-on:click="clickImage">
+      <img id = "addPetIcon"  src="https://cdn-icons-png.flaticon.com/512/16/16057.png"/>
+      </div>
+      </div>
+
+      <div v-if="showForm">
       <pet-register/>
+      </div>
+      
       <br>
       <button class="btn btn-lg btn-primary btn-block" type="submit">
         Create Account
@@ -68,6 +78,7 @@ export default {
       },
       registrationErrors: false,
       registrationErrorMsg: 'There were problems registering this user.',
+      showForm: false
     };
   },
   methods: {
@@ -99,6 +110,9 @@ export default {
       this.registrationErrors = false;
       this.registrationErrorMsg = 'There were problems registering this user.';
     },
+    clickImage() {
+      this.showForm = !this.showForm ;
+    }
   },
 };
 </script>
@@ -106,5 +120,23 @@ export default {
 <style>
 body{
   text-align: center;
+}
+#paw-print {
+  height:400px;
+  width: auto;
+  
+}
+#addPetIcon{
+ height:25px;
+  width: auto;
+background-color:#F0EEE4;
+color: #a1a197;
+margin-left: 10px;
+
+}
+#addPetSection{
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
