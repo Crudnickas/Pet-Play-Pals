@@ -40,9 +40,9 @@ CREATE TABLE user_pet
 user_id INT,
 pet_id INT,
 CONSTRAINT FK_user_up FOREIGN KEY (user_id) REFERENCES users(user_id),
-CONSTRAINT FK_pet_up FOREIGN KEY (pet_id) REFERENCES pets(pet_id)
-);
+CONSTRAINT FK_pet_up FOREIGN KEY (pet_id) REFERENCES pets(pet_id),
 
+);
 
 
 --populate default data
