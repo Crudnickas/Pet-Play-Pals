@@ -18,6 +18,34 @@ namespace Capstone.DAO
             connectionString = dbConnectionString;
         }
 
+        public Pet GetPetByPetId (int PetId)
+        {
+            Pet returnPet = null;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM pets WHERE pet_id = @petid;", conn);
+                    cmd.Parameters.AddWithValue("@petid", PetId);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        returnPet = GetPetFromReader(reader);
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+
+            return returnPet;
+        }
+
         public List<Pet> GetPetByUser(int UserId)
         {
             List<Pet> returnPets = new List<Pet>();
@@ -45,6 +73,56 @@ namespace Capstone.DAO
             }
 
             return returnPets;
+        }
+
+        public Pet CreatePet(Pet newPet)
+        {
+            Pet returnPet = null;
+            int newPetId = 0;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("INSERT INTO pets (name,age,size,breed,temperament,energy,bio) OUTPUT INSERTED.pet_id VALUES (@name, @age, @size, @breed, @temperament, @energy, @bio)", conn);
+                cmd.Parameters.AddWithValue("@name", newPet.Name);
+                cmd.Parameters.AddWithValue("@age", newPet.Age);
+                cmd.Parameters.AddWithValue("@size", newPet.Size);
+                cmd.Parameters.AddWithValue("@breed", newPet.Breed);
+                cmd.Parameters.AddWithValue("@temperament", newPet.Temperament);
+                cmd.Parameters.AddWithValue("@energy", newPet.Energy);
+                cmd.Parameters.AddWithValue("@bio", newPet.Bio);
+                newPetId = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+            returnPet = GetPetByPetId(newPetId);
+            return returnPet;
+        }
+        public bool CreatePetUser(int userId, int petId)
+        {
+            bool isSucessful = false;
+            try {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("INSERT INTO user_pet(user_id,pet_id) VALUES ( @userId, @petId)", conn);
+                    cmd.Parameters.AddWithValue("@userId", userId);
+                    cmd.Parameters.AddWithValue("@petId", petId);
+
+                    int numberOfRows = cmd.ExecuteNonQuery();
+                    if (numberOfRows > 0)
+                    {
+                        isSucessful = true;
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+
+
+            return isSucessful;
         }
         private Pet GetPetFromReader (SqlDataReader reader)
         {

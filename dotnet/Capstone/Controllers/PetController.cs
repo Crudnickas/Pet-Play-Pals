@@ -12,10 +12,58 @@ namespace Capstone.Controllers
     public class PetController : Controller
     {
         private readonly IPetDao petDao;
+        private readonly IUserDao userDao;
 
-        public PetController(IPetDao _petDao)
+        public PetController(IPetDao _petDao, IUserDao _userDao)
         {
             petDao = _petDao;
+            userDao = _userDao;
+
+        }
+        [HttpPost()]
+        public ActionResult<Pet> CreatePet(Pet newPet)
+        {
+            Pet petToReturn = null;
+            petToReturn = petDao.CreatePet(newPet);
+            if (petToReturn != null)
+            {
+                return Ok(petToReturn);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+        [HttpPost("/relationship")]
+        public ActionResult CreatePetRelationship(Relationship relationship)
+        {
+            int petId = relationship.PetId;
+            User user = userDao.GetUser(relationship.Username);
+            int userId = user.UserId;
+            bool wasSucessful = petDao.CreatePetUser(userId,petId);
+            if (wasSucessful == true)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<Pet> GetPetsByPetId(int id)
+        {
+            Pet petToReturn = null;
+            petToReturn = petDao.GetPetByPetId(id);
+            if (petToReturn != null)
+            {
+                return Ok(petToReturn);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         [HttpGet("userid/{id}")]
@@ -31,14 +79,6 @@ namespace Capstone.Controllers
             {
                 return NotFound();
             }
-        }
-        [HttpPost()]
-        public IActionResult CreatePet(Pet AddPet) {
-
-            // Petdao.AddPet(AddPet) 
-            // Verify AddPet worked, if not, return bad request
-            return Ok(AddPet);
-                 
         }
 
     }

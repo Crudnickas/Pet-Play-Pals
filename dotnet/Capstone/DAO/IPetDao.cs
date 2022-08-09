@@ -8,5 +8,9 @@ namespace Capstone.DAO
     public interface IPetDao
     {
         List<Pet> GetPetByUser(int userId);
+        Pet GetPetByPetId(int PetId);
+        Pet CreatePet(Pet newPet);
+
+        bool CreatePetUser(int userId, int petId);
     }
 }
