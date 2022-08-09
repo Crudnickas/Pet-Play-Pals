@@ -42,27 +42,20 @@
     </option>
     </select>
       <br>
-      <!--
-          <label for="petTemperament" class="sr-only">Pet Temperament: </label>
-        <select multiple name="petTemperament" id="petTemperament" v-model="pet.temperament"> 
-        <option disabled value = ""> Please Select one </option>
-        <option
-      v-for="temperament in $store.state.petTemperament"
-      v-bind:key="temperament.id">
-      {{temperament.type}}
-    </option>
-    </select>
-    -->
+      <div id="petTemperamentSection">
+        <label for="petTemperament" class="sr-only">Pet Temperament: </label>
+          <multiselect id ="multiselectTempDropdown"
+           @select="changingArrayToString"
+          v-model="temperamentArray"
+          :options="$store.state.petTemperament"
+          :multiple="true"
+          :close-on-select="false"
+         >
+          </multiselect>
+          </div>
+      
     <br>
 
-    <label for="petTemperament">Pet Temperament (Check the Ones that Apply):</label>
-    <div v-for="temperament in $store.state.petTemperament" v-bind:key="temperament.type">
-        <input type="checkbox" v-model="pet.temperament" v-bind:checked="temperament.checked" v-on:click="checkBox(temperament)"/> 
-        <label> {{temperament.type}}</label>
-        
-    </div>
-    
-     
           <div>
           <label for="petEnergy" class="sr-only">Pet Energy Level : </label>
         <select name="petEnergy" id="petEnergy" v-model="pet.energy"> 
@@ -86,29 +79,46 @@
 </template>
 
 <script>
+import Multiselect from 'vue-multiselect'
 export default {
 name: 'pet-register',
+components:{Multiselect},
 data(){
     return{
+        temperamentArray:[],
         pet:{
             name:"",
             age:"",
             size:"",
             breed:"",
-            temperament:"",
+            temperament: "",
             energy:"",
             bio:""
         }
+       
     }
+
 },
-methods: {
-    checkBox(temperament) {
-        this.$store.commit('FLIP_CHECKED', temperament);
+methods:{
+    changingArrayToString(){
+        this.pet.temperament=this.temperamentArray.toString();
+        console.log(this.pet.temperament);
     }
 }
 }
 </script>
 
+<style src="vue-multiselect/dist/vue-multiselect.min.css">
+
+</style>
 <style>
+.multiselect{
+width:40%;
+color:#878357;
+}
+#petTemperamentSection{
+    display:flex;
+    justify-content: flex-end;
+}
 
 </style>
