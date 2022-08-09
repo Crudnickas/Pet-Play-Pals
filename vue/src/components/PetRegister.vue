@@ -1,5 +1,6 @@
 <template>
-<form  class="form-register" @submit.prevent="register" >
+<div >
+<form  class="form-register" @submit.prevent="register"  >
     <h4>Please Enter Your Pet's Information To Register Them:</h4>
      <label for="petName" class="sr-only">Pet Name: </label>
       <input
@@ -9,6 +10,7 @@
         placeholder="Pet Name"
         v-model="pet.name"
       />
+      
       <br>
      
        <label for="petAge" class="sr-only">Pet Age:  </label>
@@ -73,13 +75,17 @@
 <textarea id="petBio" name="petBio" v-model="pet.bio">
 </textarea>
  
+
+</form>
+<!-- Try to get this to work 
 <div id= "addPetSection">
       <p>Click here add another pet:</p>
       <div v-on:click="showadditionalForm">
       <img id = "addPetIcon"  src="https://cdn-icons-png.flaticon.com/512/16/16057.png"/>
       </div>
       </div>
-</form>
+      -->
+</div>
 
 
       
@@ -103,7 +109,9 @@ data(){
             energy:"",
             bio:""
         },
-        showPetForm: false
+        showPetForm: false,
+       
+      
        
        
     }
@@ -115,7 +123,7 @@ methods:{
         console.log(this.pet.temperament);
     },
     showadditionalForm(){
-        this.showPetForm = !this.showPetForm ;
+        this.showPetForm = true;
     }
 }
 }

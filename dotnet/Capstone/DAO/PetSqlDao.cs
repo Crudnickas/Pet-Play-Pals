@@ -46,6 +46,7 @@ namespace Capstone.DAO
 
             return returnPets;
         }
+
         private Pet GetPetFromReader (SqlDataReader reader)
         {
             Pet p = new Pet()
