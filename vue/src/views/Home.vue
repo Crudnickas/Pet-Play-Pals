@@ -1,12 +1,86 @@
 <template>
   <div class="home">
-    <h1>Home</h1>
-    <p>You must be authenticated to see this</p>
+    <div id="menu-user-profile">
+    
+    <div id="menu">
+    <img src="..\assets\hamburger-menu-icon.png" id="menu-icon">
+    </div>
+
+    <div id="user-profile">
+    <img src="..\assets\userprofileicon.jpg" id="user-profile-icon">
+    Welcome, <i>Logged In User</i>!
+    </div>
+    </div>
+
+    <h1 class="h3 mb-3 font-weight-normal">Welcome To Pet Play Pals!</h1>
+    
+    <img src="..\assets\PawPrint.png" id="paw-print"><br>
+    <div id="homepage-components">
+    
+    <div id="registered-pets">
+    <registered-pets/> 
+    </div>
+    
+    <div id="scheduled-playdates">
+      <scheduled-play-dates/>
+    </div>
+    
+    </div>
+    <!-- <p>You must be authenticated to see this</p> -->
   </div>
 </template>
 
 <script>
+import RegisteredPets from '../components/RegisteredPets.vue';
+import ScheduledPlayDates from '../components/ScheduledPlayDates.vue';
+
 export default {
-  name: "home"
+  name: "home",
+  components: {
+    RegisteredPets,
+    ScheduledPlayDates
+  },
 };
 </script>
+
+<style>
+#menu-user-profile {
+  display: flex;
+  justify-content: space-between;
+}
+
+#menu-icon {
+  height: 50px;
+  width: auto;
+  text-align: left;
+  display: flex;
+  justify-content: left;
+}
+
+#user-profile-icon {
+  height: 50px;
+  width: auto;
+}
+
+
+
+#homepage-components {
+  display: flex;
+  justify-content: center;
+
+}
+
+#registered-pets, #scheduled-playdates {
+  background-color: #878357;
+  color: white;
+  width: 500px;
+  height: 250px;
+  margin: 75px;
+}
+
+#paw-print {
+  height:400px;
+  width: auto;
+}
+
+</style>
