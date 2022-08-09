@@ -1,5 +1,6 @@
 <template>
 <form class="form-register" @submit.prevent="register">
+    <h4>Please Enter Your Pet's Information To Register Them:</h4>
      <label for="petName" class="sr-only">Pet Name: </label>
       <input
         type="text"
@@ -9,8 +10,8 @@
         v-model="pet.name"
       />
       <br>
-      <!-- THIS NEEDS TO BE added with the right information -->
-       <label for="petAge" class="sr-only">Pet Age: </label>
+     
+       <label for="petAge" class="sr-only">Pet Age:  </label>
         <select name="petAge" id="petAge" v-model="pet.age">
         <option disabled value = ""> Please Select one </option>
         <option value="puppy">Puppy (under 1 year)</option>
@@ -41,15 +42,43 @@
     </option>
     </select>
       <br>
+      <!--
           <label for="petTemperament" class="sr-only">Pet Temperament: </label>
-        <select name="petTemperament" id="petTemperament" v-model="pet.temperament"> 
+        <select multiple name="petTemperament" id="petTemperament" v-model="pet.temperament"> 
         <option disabled value = ""> Please Select one </option>
         <option
       v-for="temperament in $store.state.petTemperament"
       v-bind:key="temperament.id">
-      {{temperament}}
+      {{temperament.type}}
     </option>
     </select>
+    -->
+    <br>
+
+    <label for="petTemperament">Pet Temperament (Check the Ones that Apply):</label>
+    <div v-for="temperament in $store.state.petTemperament" v-bind:key="temperament.type">
+        <input type="checkbox" v-model="pet.temperament" v-bind:checked="temperament.checked" v-on:click="checkBox(temperament)"/> 
+        <label> {{temperament.type}}</label>
+        
+    </div>
+    
+     
+          <div>
+          <label for="petEnergy" class="sr-only">Pet Energy Level : </label>
+        <select name="petEnergy" id="petEnergy" v-model="pet.energy"> 
+        <option disabled value = ""> Please Select one </option>
+        <option
+      v-for="energy in $store.state.petEnergy"
+      v-bind:key="energy.id">
+      {{energy}}
+    </option>
+    </select>
+    </div>
+    <br>
+    <label for="petBio">Enter Pet Bio Here:</label>
+
+<textarea id="petBio" name="petBio" v-model="pet.bio">
+</textarea>
 
 
 </form>
@@ -70,6 +99,11 @@ data(){
             energy:"",
             bio:""
         }
+    }
+},
+methods: {
+    checkBox(temperament) {
+        this.$store.commit('FLIP_CHECKED', temperament);
     }
 }
 }

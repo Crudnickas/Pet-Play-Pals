@@ -21,7 +21,22 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {},
     dogBreeds: ["Australian Shepherd", "Beagle", "Bernese Mountain Dog","Boston Terrier","Boxer","Bulldog","Cane Corso","Cavalier King Charles Spaniel","Dachshund","Doberman Pinscher","French Bulldog","German Shepherd Dog","Golden Retriever","Great Dane","Havanese","Labrador Retriever","Miniature Schnauzer","Pembroke Welsh Corgi","Pointer (German Shorthaired)","Pomeranian","Poodle","Rottweiler","Shih Tzu","Siberian Huskie","Yorkshire Terrier"],
-    petTemperament: ["Aggressive","Anxious","Bold","Calm","Friendly", "Impulsive","Independent"," Naughty","Neutral","Passive","Playful","Timid"]
+    petTemperament: [
+      {type:"Aggressive",checked: false},
+      {type:"Anxious", checked: false},
+      {type: "Bold", checked: false},
+      {type:"Calm", checked: false},
+      {type:"Friendly", checked: false},
+      {type: "Impulsive", checked: false},
+      {type: "Independent", checked: false},
+       {type:"Naughty", checked: false},
+       {type: "Neutral", checked: false},
+       {type:"Passive", checked: false},
+       {type: "Playful", checked: false},
+       {type: "Timid", checked: false},
+      ],
+
+    petEnergy: ["Low", "Medium", "High"]
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -39,6 +54,9 @@ export default new Vuex.Store({
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};
+    },
+    FLIP_CHECKED(state, petTemperament) {
+      petTemperament.checked = ! petTemperament.checked;
     }
   }
 })

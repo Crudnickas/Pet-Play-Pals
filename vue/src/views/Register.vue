@@ -2,7 +2,7 @@
   <div id="register" class="text-center">
     <form class="form-register" @submit.prevent="register">
       <h1 class="h3 mb-3 font-weight-normal">Welcome To Pet Play Pals!</h1>
-      <img src="..\assets\PawPrint.png">
+      <img  src="..\assets\PawPrint.png" id = "paw-print">
       <h2>Register your account to find play dates now.</h2>
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
@@ -38,7 +38,12 @@
         required
       />
       <br>
+      <div id= "addPetSection">
+      <p>Click here to register a pet:</p>
+      <img id = "addPetIcon" src="https://cdn-icons-png.flaticon.com/512/16/16057.png">
+      </div>
       <pet-register/>
+      
       <br>
       <button class="btn btn-lg btn-primary btn-block" type="submit">
         Create Account
@@ -106,5 +111,23 @@ export default {
 <style>
 body{
   text-align: center;
+}
+#paw-print {
+  height:400px;
+  width: auto;
+  
+}
+#addPetIcon{
+ height:25px;
+  width: auto;
+background-color:#F0EEE4;
+color: #a1a197;
+margin-left: 10px;
+
+}
+#addPetSection{
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
