@@ -30,7 +30,7 @@ CREATE TABLE pets (
 	age varchar(50) NOT NULL,
 	size varchar(50) NOT NULL,
 	breed varchar(50) NOT NULL,
-	temperament varchar(50) NOT NULL,
+	temperament varchar(200) NOT NULL,
 	energy varchar(50) NOT NULL, 
 	bio varchar(200) NOT NULL,
 	CONSTRAINT PK_pet PRIMARY KEY (pet_id)
@@ -49,5 +49,14 @@ CONSTRAINT FK_pet_up FOREIGN KEY (pet_id) REFERENCES pets(pet_id)
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('user','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user');
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
 
+
+INSERT INTO pets (name,age,size,breed,temperament,energy,bio) VALUES ('Buddy','Puppy','Small','Beagle','Aggressive','Medium','Stupid Little Dog :)')
+INSERT INTO pets (name,age,size,breed,temperament,energy,bio) VALUES ('TuffDude','Adult','Mini','Beagle','Aggressive','Medium','Stupid Tiny Dog :)')
+
+INSERT INTO user_pet(user_id,pet_id) VALUES (1,1)
+INSERT INTO user_pet(user_id,pet_id) VALUES (1,2)
+INSERT INTO user_pet(user_id,pet_id) VALUES (2,1)
 GO
 select * from users
+select * from pets
+select * from user_pet

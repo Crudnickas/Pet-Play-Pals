@@ -7,9 +7,10 @@ namespace Capstone.Models
 {
     public class Pet
     {
+        public int PetId { get; set; }
         public string Name { get; set; }
 
-        public int Age { get; set; }
+        public string Age { get; set; }
 
         public string Size { get; set; }
 
@@ -22,4 +23,5 @@ namespace Capstone.Models
         public string Bio { get; set; }
 
     }
+
 }
