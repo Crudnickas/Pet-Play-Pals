@@ -1,20 +1,28 @@
 <template>
   <div class="main">
-  <div v-if="showForm" class="menu"><h1>HELLO MENU!</h1></div>
+  <div id="menu">
+  <img v-on:click="showHideMenu" src="..\assets\hamburger-menu-icon.png" id="menu-icon">
+  <div id="menu-list" v-if="showForm">
+    <h2>HELLO MENU!</h2>
+    <h2>HOME</h2>
+    <h2>REGISTERED PETS</h2>
+    <h2>USER PROFILE</h2>
+    <h2>SCHEDULED PLAYDATES</h2>
+    <h2>MAP</h2>
+    <h2>FORUM</h2> 
+    <h2><router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link></h2>   
+    </div></div>
   <div class="home">
     <div id="menu-user-profile">
     
-    <div id="menu">
-    <img v-on:click="showHideMenu" src="..\assets\hamburger-menu-icon.png" id="menu-icon">
-    </div>
 
     <div id="user-profile">
     <img src="..\assets\userprofileicon.jpg" id="user-profile-icon">
-    Welcome, <i>Logged In User</i>!
+    Welcome, <i>{{this.$store.state.user.username}}</i>!
     </div>
     </div>
 
-    
+    <div id="body">
     <h1 class="h3 mb-3 font-weight-normal">Welcome To Pet Play Pals!</h1>
     
     <img src="..\assets\PawPrint.png" id="paw-print"><br>
@@ -29,6 +37,7 @@
     </div>
     
     </div>
+    </div>
     <!-- <p>You must be authenticated to see this</p> -->
   </div>
   </div>
@@ -42,7 +51,7 @@ export default {
   name: "home",
   data() {
     return {
-      showForm: false
+      showForm: true
       }
     },
   components: {
@@ -60,43 +69,57 @@ export default {
 <style>
 #app > div.main {
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 200px 3fr;
     grid-template-areas:
     "menu home";
 }
 
 #menu {
   grid-area: menu;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  padding-right:0px;
+  margin-right: 0px;
+}
+
+#menu-list {
+  padding-top: 0px;
+  margin-top: 0px;
 }
 
 #home {
   grid-area: home;
+  padding-left:0px;
+  margin-left: 0px;
 }
 
 #menu-user-profile {
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
 }
 
 #menu-icon {
   height: 50px;
-  width: auto;
+  width: 50px;
   text-align: left;
   display: flex;
   justify-content: left;
 }
+
 
 #user-profile-icon {
   height: 50px;
   width: auto;
 }
 
-
+#body {
+  padding-right: 200px;
+}
 
 #homepage-components {
   display: flex;
   justify-content: center;
-
 }
 
 #registered-pets, #scheduled-playdates {

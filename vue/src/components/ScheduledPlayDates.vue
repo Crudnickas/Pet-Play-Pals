@@ -1,6 +1,7 @@
 <template>
 <div>
-    <p class="h3 mb-3 font-weight-normal">You currently have no scheduled playdates</p>  
+    <h2 class="h3 mb-3 font-weight-normal">Your Scheduled Playdates</h2>  
+    <p>You currently have no scheduled playdates</p>
 </div>  
 </template>
 
