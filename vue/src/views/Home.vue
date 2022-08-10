@@ -51,7 +51,7 @@ export default {
   name: "home",
   data() {
     return {
-      showForm: true
+      showForm: false
       }
     },
   components: {

@@ -27,7 +27,7 @@ namespace Capstone.Controllers
             petToReturn = petDao.CreatePet(newPet);
             if (petToReturn != null)
             {
-                return Ok(petToReturn);
+                return Created($"pet/{petToReturn.PetId}",petToReturn);
             }
             else
             {

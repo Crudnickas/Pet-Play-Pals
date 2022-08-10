@@ -1,6 +1,7 @@
 <template>
 <div >
-<form  class="form-register" @submit.prevent="register"  >
+<form  class="form-register"  >
+    <!--@submit.prevent="register" -->
     <h4>Please Enter Your Pet's Information To Register Them:</h4>
      <label for="petName" class="sr-only">Pet Name: </label>
       <input
@@ -9,12 +10,14 @@
         class="form-control"
         placeholder="Pet Name"
         v-model="pet.name"
+        v-on:change="copyPetToStore"
+        required
       />
       
       <br>
      
        <label for="petAge" class="sr-only">Pet Age:  </label>
-        <select name="petAge" id="petAge" v-model="pet.age">
+        <select name="petAge" id="petAge" v-model="pet.age"  v-on:change="copyPetToStore">
         <option disabled value = ""> Please Select one </option>
         <option value="Puppy">Puppy (under 1 year)</option>
         <option value="Adult">Adult (1 to 9 years)</option>
@@ -24,7 +27,7 @@
     </select>
     <br>
           <label for="petSize" class="sr-only">Pet Size: </label>
-        <select name="petSize" id="petSize" v-model="pet.size">
+        <select name="petSize" id="petSize" v-model="pet.size" v-on:change="copyPetToStore">
         <option disabled value = ""> Please Select one </option>
         <option value="Mini">Mini (under 10lbs)</option>
         <option value="Small">Small (11 to 20lbs) </option>
@@ -35,7 +38,7 @@
     </select>
        <br>
           <label for="petBreed" class="sr-only">Pet Breed: </label>
-        <select name="petBreed" id="petBreed" v-model="pet.breed"> 
+        <select name="petBreed" id="petBreed" v-model="pet.breed" v-on:change="copyPetToStore"> 
         <option disabled value = ""> Please Select one </option>
         <option
       v-for="breed in $store.state.dogBreeds"
@@ -44,11 +47,14 @@
     </option>
     </select>
       <br>
+    
       <div id="petTemperamentSection">
         <label id="temperamentLabel" for="petTemperament" class="sr-only">Pet Temperament: </label>
           <multiselect id ="multiselectTempDropdown"
-           @select="changingArrayToString"
           v-model="temperamentArray"
+          v-on:change="copyPetToStore"
+          @select="changingArrayToString"
+          @close="changingArrayToString"
           :options="$store.state.petTemperament"
           :multiple="true"
           :close-on-select="false"
@@ -60,7 +66,7 @@
 
           <div>
           <label for="petEnergy" class="sr-only">Pet Energy Level : </label>
-        <select name="petEnergy" id="petEnergy" v-model="pet.energy"> 
+        <select name="petEnergy" id="petEnergy" v-model="pet.energy" v-on:change="copyPetToStore"> 
         <option disabled value = ""> Please Select one </option>
         <option
       v-for="energy in $store.state.petEnergy"
@@ -72,7 +78,7 @@
     <br>
     <label for="petBio">Enter Pet Bio Here: </label>
 
-<textarea id="petBio" name="petBio" v-model="pet.bio">
+<textarea id="petBio" name="petBio" v-model="pet.bio" v-on:change="copyPetToStore">
 </textarea>
  
 
@@ -94,6 +100,8 @@
 
 <script>
 import Multiselect from 'vue-multiselect'
+
+
 export default {
 name: 'pet-register',
 components:{Multiselect},
@@ -101,6 +109,7 @@ data(){
     return{
         temperamentArray:[],
         pet:{
+            petId: 0,
             name:"",
             age:"",
             size:"",
@@ -110,6 +119,7 @@ data(){
             bio:""
         },
         showPetForm: false,
+        
        
       
        
@@ -119,12 +129,18 @@ data(){
 },
 methods:{
     changingArrayToString(){
-        this.pet.temperament=this.temperamentArray.toString();
-        console.log(this.pet.temperament);
+        this.pet.temperament=this.temperamentArray.join(',');
+        console.log(this.pet.temperamentArray);
     },
     showadditionalForm(){
         this.showPetForm = true;
+    },
+    copyPetToStore(){
+        this.changingArrayToString;
+        this.$store.commit("SETPETTOPOST", this.pet);
+        
     }
+  
 }
 }
 </script>
