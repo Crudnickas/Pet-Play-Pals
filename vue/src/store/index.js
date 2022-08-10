@@ -24,7 +24,9 @@ export default new Vuex.Store({
     petTemperament: ["Aggressive","Anxious","Bold","Calm","Friendly","Impulsive","Independent", "Naughty","Neutral","Passive", "Playful", "Timid" ],
 
     petEnergy: ["Low", "Medium", "High"],
-    pets: []
+    pets: [],
+    petToPost: {}
+
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -43,5 +45,8 @@ export default new Vuex.Store({
       state.user = {};
       axios.defaults.headers.common = {};
     },
+  SETPETTOPOST(state,pet) {
+    state.petToPost = pet;
+  }
   }
 })
