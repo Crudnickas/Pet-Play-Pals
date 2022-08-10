@@ -3,6 +3,8 @@
     <h2 class="h3 mb-3 font-weight-normal">Your Registered pets</h2>
     <div v-if="pet.id === 0">You currently have no registered pets</div>
     <div id="pet" v-for="pet in pet" v-bind:key="pet.petId"><b><em>{{pet.name}},</em></b> {{pet.breed}} ({{pet.age}})</div>
+    <p><router-link v-bind:to="{ name: 'addpet' }">Click here to add a pet</router-link></p>
+
 
 </div>  
 </template>

@@ -7,18 +7,15 @@ namespace Capstone.Models
 {
     public class PlayDate
     {
-        public string Location { get; set; }
+        public int PlayDateID { get; set; }
+        public int CreatorID { get; set; }
+        public string PlayParkAddress { get; set; }
 
-        public int ScheduleID { get; set; }
+        public string PlayParkName { get; set; }
 
-        public string PlayDateName { get; set; }
+        public string PlayParkLocationNotes { get; set; }
 
-        public string PlayDateAddress { get; set; }
-
-        public DateTime ScheduledDate { get; set; }
-
-        public DateTime StartTime { get; set; }
-
-        public DateTime EndTime { get; set; }
+        public DateTime PlayDateTimeDate { get; set; }
+       
     }
 }
