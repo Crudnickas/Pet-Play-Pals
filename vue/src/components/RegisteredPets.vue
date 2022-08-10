@@ -5,6 +5,7 @@
     <noPetSection v-show="!isLoading"><div id="noPets" v-show="noPets">You currently have no registered pets</div></noPetSection>
     <petSection id="pets" v-show="!noPets">
     <div id="pet" v-for="pet in pet" v-bind:key="pet.petId"><b><em>{{pet.name}},</em></b> {{pet.breed}} ({{pet.age}})</div>
+    <p><router-link v-bind:to="{ name: 'addpet' }">Click here to add a pet</router-link></p>
     </petSection>
 
 </div>  
