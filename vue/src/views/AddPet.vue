@@ -21,7 +21,8 @@ export default {
        petUserObject: {
         username: "",
         petId: "",
-      }
+      },
+      errorMessage: "There were problems registering this pet."
     }
   },
   methods:{
@@ -45,11 +46,18 @@ export default {
               });
             }
 
-          }
+          });
        
-        )
-        }
+      }
       })
+      .catch((error) => {
+        const response = error.response;
+        if(response.status === 404){
+           this.errorMessage = error.message;
+        
+        }
+
+      });
    
     }
   },
