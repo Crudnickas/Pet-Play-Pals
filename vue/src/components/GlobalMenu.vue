@@ -6,7 +6,7 @@
     <h2><router-link v-bind:to="{ name: 'home' }">HOME</router-link></h2>
     <h2><router-link v-bind:to="{ name: 'addpet' }">REGISTER A PET</router-link></h2>
     <h2>USER PROFILE</h2>
-    <h2>PLAYDATES</h2>
+    <h2><router-link v-bind:to="{ name: 'playdates' }">PLAYDATES</router-link></h2>
     <h2>MAP</h2>
     <h2>FORUM</h2> 
     <h2><router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link></h2>
