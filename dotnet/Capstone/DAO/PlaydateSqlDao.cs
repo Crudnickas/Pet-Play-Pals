@@ -28,7 +28,7 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("SELECT playdates.playdate_id, playdates.creator_id, pets.name, playdates.play_park_address, play_park_name, playdates.play_park_location_notes, playdates.playdate_time_date FROM playdates JOIN user_pet_playdate ON playdates.playdate_id = user_pet_playdate.playdate_id JOIN pets ON user_pet_playdate.pet_id = pets.pet_id WHERE user_id = @userId;", conn);
+                    SqlCommand cmd = new SqlCommand("SELECT playdates.playdate_id, playdates.creator_id, pets.name, playdates.play_park_address, play_park_name, playdates.play_park_location_notes, playdates.playdate_time_date FROM playdates JOIN user_pet_playdate ON playdates.playdate_id = user_pet_playdate.playdate_id JOIN pets ON user_pet_playdate.pet_id = pets.pet_id WHERE user_id = @userId ORDER BY playdate_time_date ASC;", conn);
                     cmd.Parameters.AddWithValue("@userId", UserId);
                     SqlDataReader reader = cmd.ExecuteReader();
 
