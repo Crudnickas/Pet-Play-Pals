@@ -41,10 +41,27 @@ user_id INT,
 pet_id INT,
 CONSTRAINT FK_user_up FOREIGN KEY (user_id) REFERENCES users(user_id),
 CONSTRAINT FK_pet_up FOREIGN KEY (pet_id) REFERENCES pets(pet_id),
-
 );
-
-
+CREATE TABLE playdates (
+	playdate_id int IDENTITY NOT NULL,
+	creator_id int NOT NULL,
+	play_park_address varchar(200) NOT NULL,
+	play_park_name varchar(200) NOT NULL,
+	play_park_location_notes varchar(1000) NOT NULL,
+	playdate_time_date datetime NOT NULL,
+	CONSTRAINT PK_playdate PRIMARY KEY (playdate_id),
+	CONSTRAINT FK_creator_playdate FOREIGN KEY (creator_id) REFERENCES users(user_id)
+)
+CREATE TABLE user_pet_playdate
+(
+user_id INT NOT NULL,
+pet_id INT NOT NULL,
+playdate_id INT NOT NULL,
+playdate_status VARCHAR(20) NOT NULL,
+CONSTRAINT FK_user_upp FOREIGN KEY (user_id) REFERENCES users(user_id),
+CONSTRAINT FK_pet_upp FOREIGN KEY (pet_id) REFERENCES pets(pet_id),
+CONSTRAINT FK_playdate_upp FOREIGN KEY (playdate_id) REFERENCES playdates(playdate_id)
+);
 --populate default data
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('user','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user');
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
@@ -60,3 +77,5 @@ GO
 select * from users
 select * from pets
 select * from user_pet
+select * from playdates
+select * from user_pet_playdate
