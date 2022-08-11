@@ -6,6 +6,7 @@ import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
 import AddPet from '../views/AddPet.vue'
+import PlayDates from '../views/PlayDates.vue'
 
 Vue.use(Router)
 
@@ -60,7 +61,15 @@ const router = new Router({
       component: AddPet,
       meta: {
         requiresAuth: true
-      }
+      },
+    },
+    {
+      path: "/playdates",
+      name: "playdates",
+      component: PlayDates,
+      meta: {
+        requiresAuth: true
+      },
     }
 
   ]
