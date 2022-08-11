@@ -73,9 +73,33 @@ INSERT INTO pets (name,age,size,breed,temperament,energy,bio) VALUES ('TuffDude'
 INSERT INTO user_pet(user_id,pet_id) VALUES (1,1)
 INSERT INTO user_pet(user_id,pet_id) VALUES (1,2)
 INSERT INTO user_pet(user_id,pet_id) VALUES (2,1)
+
+INSERT INTO playdates(creator_id, play_park_address, play_park_name, play_park_location_notes, playdate_time_date)
+	VALUES (1, '1046 County Road 1175, Ashland, OH 44805', 'Peppy Paws Pooch Park, LLC', 'A 5-acre and 1-acre fenced park open daily from dawn until dusk. Day passes or annual passes are available for purchase.', '2019-11-11 13:23:44')
+
+INSERT INTO playdates(creator_id, play_park_address, play_park_name, play_park_location_notes, playdate_time_date)
+	VALUES (2, '1505 Merwin Ave., Cleveland, OH 44113', 'Downtown Cleveland Dog Park', 'An on-leash agility course with six stations including an A-frame ramp and teeter-totter.', '2022-11-11 13:23:44')
+
+INSERT INTO playdates(creator_id, play_park_address, play_park_name, play_park_location_notes, playdate_time_date)
+	VALUES (2, '6647 Hopkins Rd., Mentor, OH 44060', 'City of Mentor Dog Park', 'An off-leash dog park with separate areas for large and small dogs as well as a doggie water fountain, park benches, and a safe, fenced-in entry/exit area', '2008-11-11 13:23:44')
+
+UPDATE playdates SET playdate_time_date = '2022-10-21 15:00:00' WHERE playdate_id = 1
+
+UPDATE playdates SET playdate_time_date = '2022-08-22 10:00:00' WHERE playdate_id = 3
+
+INSERT INTO user_pet_playdate(user_id, pet_id, playdate_id, playdate_status)
+	VALUES(1, 1, 1, 'Accepted')
+
+INSERT INTO user_pet_playdate(user_id, pet_id, playdate_id, playdate_status)
+	VALUES(2, 1, 2, 'Accepted')
+
+	INSERT INTO user_pet_playdate(user_id, pet_id, playdate_id, playdate_status)
+	VALUES(1, 2, 3, 'Accepted')
+	
 GO
 select * from users
 select * from pets
 select * from user_pet
 select * from playdates
 select * from user_pet_playdate
+
