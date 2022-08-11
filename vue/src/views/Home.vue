@@ -5,17 +5,17 @@
   <div id="menu-list" v-if="showForm">
     <h2>HELLO MENU!</h2>
     <h2>HOME</h2>
-    <h2>REGISTERED PETS</h2>
+    <h2>REGISTER A PET</h2>
     <h2>USER PROFILE</h2>
     <h2>PLAYDATES</h2>
     <h2>MAP</h2>
     <h2>FORUM</h2> 
-    <h2><router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link></h2>   
-    </div></div>
+    <h2><router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link></h2>
+    </div>
+    </div>
+
   <div class="home">
     <div id="menu-user-profile">
-    
-
     <div id="user-profile">
     <img src="..\assets\userprofileicon.jpg" id="user-profile-icon">
     Welcome, <i>{{this.$store.state.user.username}}</i>!
@@ -26,6 +26,7 @@
     <h1 class="h3 mb-3 font-weight-normal">Welcome To Pet Play Pals!</h1>
     
     <img src="..\assets\PawPrint.png" id="paw-print"><br>
+
     <div id="homepage-components">
     
     <div id="registered-pets">
@@ -56,7 +57,7 @@ export default {
     },
   components: {
     RegisteredPets,
-    ScheduledPlayDates
+    ScheduledPlayDates,
   },
   methods: {
     showHideMenu() {
@@ -70,7 +71,7 @@ export default {
 #app > div.main {
   display: grid;
   grid-template-columns: 200px 3fr;
-    grid-template-areas:
+  grid-template-areas:
     "menu home";
 }
 
@@ -78,7 +79,7 @@ export default {
   grid-area: menu;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   padding-right:0px;
   margin-right: 0px;
 }
@@ -96,7 +97,7 @@ export default {
 
 #menu-user-profile {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 #menu-icon {
@@ -133,6 +134,10 @@ export default {
 #paw-print {
   height:400px;
   width: auto;
+}
+
+#body > h1 {
+  margin: 0px;
 }
 
 </style>
