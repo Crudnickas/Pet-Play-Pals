@@ -1,13 +1,14 @@
 <template>
 <div id="your-scheduled-playdates">
-    <h2 class="h3 mb-3 font-weight-normal">Your Scheduled Playdates</h2> 
-  <div id="isLoading" v-if="isLoading"><img src="https://c.tenor.com/qmg1JQ82uWAAAAAj/oxo-perros-cute.gif" /></div>
-  <noPlatDateSection v-show="!isLoading"><div id="noPlayDate" v-show="noPlayDate">You currently have no registered pets</div>
-    <p>You currently have no scheduled playdates</p>
-  </noPlatDateSection>
-   
+    <h2 class="h3 mb-3 font-weight-normal">Your Scheduled Playdates:</h2>
+    <div id="isLoading" v-if="isLoading"><img src="https://c.tenor.com/qmg1JQ82uWAAAAAj/oxo-perros-cute.gif" /></div>
+    <noPlayDateSection v-show="!isLoading"><div id="noPlayDate" v-show="noPlayDate">You currently have no scheduled Playdates</div>
+</noPlayDateSection>
+<playdateSection id = "playdate" v-show="!noPlayDate">
+    <div id="playDate" v-for="playDate in playDate" v-bind:key="playDate.Id"><b><em>{{playDate.playParkName}},</em></b> {{playDate.playDateTimeDate}} ({{playDate.petName}})</div>
+</playdateSection>
     <div>
-    <a href="#">Click Here to Schedule a Playdate</a><br><a href="#">Click Here to Browse Available Playdates</a>
+    <router-link v-bind:to="{name:'playdates'}">Click Here to see All Scheduled Playdates</router-link> <br><a href="#">Click Here to Browse Available Playdates</a>
     </div>
 </div>  
 </template>
@@ -22,18 +23,18 @@ data(){
         playDate: [
             {
                 playDateId:0,
-                creatorId:"",
+                creatorId:0,
                 petName:"",
                 playParkAddress:"",
                 playParkName:"",
                 PlayParkLocationNotes:"",
-                PlayDateTimeDate: ""
+                PlayDateTimeDate: 0
                 
             }
             
         ],
          noPlayDate: true,
-        isLoading: true
+        isLoading: false
     }
 
 },
