@@ -7,7 +7,7 @@
     <h2>HOME</h2>
     <h2>REGISTERED PETS</h2>
     <h2>USER PROFILE</h2>
-    <h2>SCHEDULED PLAYDATES</h2>
+    <h2>PLAYDATES</h2>
     <h2>MAP</h2>
     <h2>FORUM</h2> 
     <h2><router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link></h2>   
@@ -51,7 +51,7 @@ export default {
   name: "home",
   data() {
     return {
-      showForm: true
+      showForm: false
       }
     },
   components: {
