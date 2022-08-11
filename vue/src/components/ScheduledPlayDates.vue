@@ -15,14 +15,9 @@ name: 'scheduled-playdates'
 
 </script>
 
-<style>
+<style scoped>
 a:link {
     color: #F0EEE4;
     font-weight: bold;
 }
-
-#scheduled-playdates > div > schedulelinks {
-
-}
-
 </style>

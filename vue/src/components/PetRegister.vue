@@ -1,5 +1,6 @@
 <template>
-<div >
+<div>    
+<global-menu/>
 <form  class="form-register"  >
     <!--@submit.prevent="register" -->
     <h4>Please Enter Your Pet's Information To Register Them:</h4>
@@ -93,18 +94,21 @@
       -->
 </div>
 
-
       
   
 </template>
 
 <script>
 import Multiselect from 'vue-multiselect'
+import GlobalMenu from '../components/GlobalMenu.vue';
 
 
 export default {
 name: 'pet-register',
-components:{Multiselect},
+components:{
+  Multiselect,
+  GlobalMenu
+},
 data(){
     return{
         temperamentArray:[],
@@ -118,14 +122,8 @@ data(){
             energy:"",
             bio:""
         },
-        showPetForm: false,
-        
-       
-      
-       
-       
+        showPetForm: false,      
     }
-
 },
 methods:{
     changingArrayToString(){
@@ -137,29 +135,22 @@ methods:{
     },
     copyPetToStore(){
         this.changingArrayToString;
-        this.$store.commit("SETPETTOPOST", this.pet);
-        
+        this.$store.commit("SETPETTOPOST", this.pet); 
     }
-  
 }
 }
 </script>
-
 <style src="vue-multiselect/dist/vue-multiselect.min.css">
-
 </style>
+
 <style>
 .multiselect{
 width:20%;
 color:#878357;
 margin-right: 5px;
 }
-
-
 #petTemperamentSection{
     display:flex;
     justify-content: center;
-    
 }
-
 </style>

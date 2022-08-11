@@ -1,20 +1,7 @@
 <template>
-  <div class="main">
-  <div id="menu">
-  <img v-on:click="showHideMenu" src="..\assets\hamburger-menu-icon.png" id="menu-icon">
-  <div id="menu-list" v-if="showForm">
-    <h2>HELLO MENU!</h2>
-    <h2>HOME</h2>
-    <h2>REGISTER A PET</h2>
-    <h2>USER PROFILE</h2>
-    <h2>SCHEDULED PLAYDATES</h2>
-    <h2>MAP</h2>
-    <h2>FORUM</h2> 
-    <h2><router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link></h2>
-    </div>
-    </div>
-
-  <div class="home">
+  <div><!-- <div class="main"> -->
+  <global-menu/>
+  <!-- <div class="home">
     <div id="menu-user-profile">
     <div id="user-profile">
     <img src="..\assets\userprofileicon.jpg" id="user-profile-icon">
@@ -25,7 +12,7 @@
     <div id="body">
     <h1 class="h3 mb-3 font-weight-normal">Welcome To Pet Play Pals!</h1>
     
-    <img src="..\assets\PawPrint.png" id="paw-print"><br>
+    <img src="..\assets\PawPrint.png" id="paw-print"><br> -->
 
     <div id="homepage-components">
     
@@ -38,15 +25,15 @@
     </div>
     
     </div>
+    <p>You must be authenticated to see this</p>
     </div>
-    <!-- <p>You must be authenticated to see this</p> -->
-  </div>
-  </div>
 </template>
 
 <script>
 import RegisteredPets from '../components/RegisteredPets.vue';
 import ScheduledPlayDates from '../components/ScheduledPlayDates.vue';
+import GlobalMenu from '../components/GlobalMenu.vue';
+
 
 export default {
   name: "home",
@@ -58,6 +45,7 @@ export default {
   components: {
     RegisteredPets,
     ScheduledPlayDates,
+    GlobalMenu
   },
   methods: {
     showHideMenu() {
@@ -68,55 +56,55 @@ export default {
 </script>
 
 <style>
-#app > div.main {
+/* #app > div.main {
   display: grid;
   grid-template-columns: 200px 3fr;
   grid-template-areas:
     "menu home";
-}
+} */
 
-#menu {
+/* #menu {
   grid-area: menu;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   padding-right:0px;
   margin-right: 0px;
-}
+} */
 
 #menu-list {
   padding-top: 0px;
   margin-top: 0px;
 }
 
-#home {
+/* #home {
   grid-area: home;
   padding-left:0px;
   margin-left: 0px;
-}
+} */
 
-#menu-user-profile {
+/* #menu-user-profile {
   display: flex;
   justify-content: flex-end;
-}
+} */
 
-#menu-icon {
+/* #menu-icon {
   height: 50px;
   width: 50px;
   text-align: left;
   display: flex;
   justify-content: left;
-}
+} */
 
-
+/* 
 #user-profile-icon {
   height: 50px;
   width: auto;
-}
+} */
 
-#body {
+/* #body {
   padding-right: 200px;
-}
+} */
 
 #homepage-components {
   display: flex;
@@ -131,10 +119,11 @@ export default {
   margin: 75px;
 }
 
-#paw-print {
+/* #paw-print {
+  margin-top: 20px;
   height:400px;
   width: auto;
-}
+} */
 
 #body > h1 {
   margin: 0px;
