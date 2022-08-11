@@ -6,7 +6,7 @@
     <h2><router-link v-bind:to="{ name: 'home' }">HOME</router-link></h2>
     <h2><router-link v-bind:to="{ name: 'addpet' }">REGISTER A PET</router-link></h2>
     <h2>USER PROFILE</h2>
-    <h2>SCHEDULED PLAYDATES</h2>
+    <h2>PLAYDATES</h2>
     <h2>MAP</h2>
     <h2>FORUM</h2> 
     <h2><router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link></h2>
@@ -24,7 +24,7 @@
     </div>
 
     <div id="body">
-    <h1 class="h3 mb-3 font-weight-normal">Welcome To Pet Play Pals!</h1>
+    <h1 class="h3 mb-3 font-weight-normal" v-show="homePage">Welcome To Pet Play Pals!</h1>
     
     <img src="..\assets\PawPrint.png" id="paw-print"><br>
     </div>
@@ -40,6 +40,7 @@ export default {
       showForm: false
       }
     },
+  props: ['homePage'], 
   methods: {
     showHideMenu() {
       this.showForm = !this.showForm;
@@ -63,8 +64,12 @@ export default {
   padding-right:0px;
   margin-right: 0px;
 }
+#menu-list {
+  padding-top: 0px;
+  margin-top: 0px;
+}
 #paw-print {
-  margin-top: 20px;
+  margin-top: 0px;
   height:400px;
   width: auto;
 }
@@ -87,6 +92,10 @@ export default {
 #user-profile-icon {
   height: 50px;
   width: auto;
+}
+body > h1 {
+  margin: 0px;
+  padding: 0px;
 }
 a:link {
   color: #878357

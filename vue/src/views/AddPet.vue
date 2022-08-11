@@ -1,5 +1,6 @@
 <template>
 <div id=addPetPage>
+<global-menu/>
 <pet-register/>
 <div id= "AddPetSubmitCancel">
 <button class = "submitButton" type="submit" value="Submit" v-on:click="addNewPet">Submit</button>
@@ -11,10 +12,13 @@
 <script>
 import PetRegister from '../components/PetRegister.vue'
 import PetService from '../services/PetService';
+import GlobalMenu from '../components/GlobalMenu.vue'
+
 export default {
     name: "add-pet",
     components: {
         PetRegister,
+        GlobalMenu
   },
   data(){
     return{

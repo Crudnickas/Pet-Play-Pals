@@ -1,6 +1,5 @@
 <template>
-<div>    
-<global-menu/>
+<div>
 <form  class="form-register"  >
     <!--@submit.prevent="register" -->
     <h4>Please Enter Your Pet's Information To Register Them:</h4>
@@ -100,14 +99,11 @@
 
 <script>
 import Multiselect from 'vue-multiselect'
-import GlobalMenu from '../components/GlobalMenu.vue';
-
 
 export default {
 name: 'pet-register',
 components:{
-  Multiselect,
-  GlobalMenu
+  Multiselect
 },
 data(){
     return{
