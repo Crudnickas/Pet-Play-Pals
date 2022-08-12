@@ -23,10 +23,11 @@ namespace Capstone.Controllers
         }
 
         [HttpGet("userid/{id}")]
-        public ActionResult<IList<PlayDate>> GetPlayDatesByUser(int id)
+        public ActionResult<IList<PlayDateResponse>> GetPlayDatesByUser(int id)
         {
-            IList<PlayDate> playdatesToReturn = new List<PlayDate>();
+            IList<PlayDateResponse> playdatesToReturn = new List<PlayDateResponse>();
             playdatesToReturn = playdateDao.GetPlayDatesByUser(id);
+
             if (playdatesToReturn != null)
             {
                 return Ok(playdatesToReturn);
