@@ -3,8 +3,6 @@
 <global-menu/>
 <scheduled-play-dates/>
 <schedule-playdate-form/>
-
-
 </div>
 
   
@@ -23,9 +21,6 @@ export default {
          GlobalMenu
 
      }
-
-
-
 };
 </script>
 

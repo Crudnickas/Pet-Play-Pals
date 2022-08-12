@@ -7,6 +7,8 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import AddPet from '../views/AddPet.vue'
 import PlayDates from '../views/PlayDates.vue'
+import FileUpload from '../components/FileUpload.vue'
+import ScheduledPlayDatesDetail from '../components/ScheduledPlayDatesDetail.vue'
 
 Vue.use(Router)
 
@@ -67,6 +69,22 @@ const router = new Router({
       path: "/playdates",
       name: "playdates",
       component: PlayDates,
+      meta: {
+        requiresAuth: true
+      },
+    },
+    {
+      path: "/fileupload",
+      name: "fileupload",
+      component: FileUpload,
+      meta: {
+        requiresAuth: true
+      },
+    },
+    {
+      path: "/playdatedetail",
+      name: "playdate-detail",
+      component: ScheduledPlayDatesDetail,
       meta: {
         requiresAuth: true
       },
