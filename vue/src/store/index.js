@@ -25,6 +25,7 @@ export default new Vuex.Store({
 
     petEnergy: ["Low", "Medium", "High"],
     pets: [],
+    userRegisteredPets: [],
     petToPost: {},
     playDateLocations: [
       {

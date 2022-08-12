@@ -9,7 +9,7 @@
     <h2><router-link v-bind:to="{ name: 'playdates' }">PLAYDATES</router-link></h2>
     <h2>MAP</h2>
     <h2>FORUM</h2> 
-    <h2><router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link></h2>
+    <h2><router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">LOGOUT</router-link></h2>
     </div>
     </div>
 
@@ -34,7 +34,7 @@
 
 <script>
 export default {
-  name: "menu",
+  name: "globalmenu",
   data() {
     return {
       showForm: false
@@ -93,8 +93,9 @@ export default {
   height: 50px;
   width: auto;
 }
-body > h1 {
+#body > h1 {
   margin: 0px;
+  margin-top: -50px;
   padding: 0px;
 }
 a:link {
