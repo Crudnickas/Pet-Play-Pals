@@ -112,7 +112,7 @@ namespace Capstone.DAO
             {
 
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("INSERT INTO playdates(creator_id, play_park_address, play_park_name, play_park_location_notes, playdate_time_date) VALUES (@creatorId, '@play_park_address', '@play_park_name', '@play_park_location_notes', '@playdate_time_date')", conn);
+                SqlCommand cmd = new SqlCommand("INSERT INTO playdates(creator_id, play_park_address, play_park_name, play_park_location_notes, playdate_time_date) OUTPUT INSERTED.playdate_id VALUES (@creatorId,@play_park_address,@play_park_name, @play_park_location_notes, @playdate_time_date);", conn);
                 cmd.Parameters.AddWithValue("@creatorId", newPlayDate.CreatorID);
                 cmd.Parameters.AddWithValue("@play_park_address", newPlayDate.PlayParkAddress);
                 cmd.Parameters.AddWithValue("@play_park_location_notes", newPlayDate.PlayParkLocationNotes);
@@ -123,7 +123,7 @@ namespace Capstone.DAO
             returnPlayDate = GetPlayDateByPlayDateId(newPlayDateId);
             return returnPlayDate;
         }
-        public bool CreateUserPetPlayDate(int userId, int petId, int playdateId)
+        public bool CreateUserPetPlayDate(int userId, int petId, int playdateId,string status)
         {
             bool isSucessful = false;
             try
@@ -132,10 +132,11 @@ namespace Capstone.DAO
                 {
 
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("INSERT INTO user_pet_playdate(user_id, pet_id, playdate_id, playdate_status)VALUES(@user_id, @pet_id, @playdate_id, 'pending'))", conn);
+                    SqlCommand cmd = new SqlCommand("INSERT INTO user_pet_playdate(user_id, pet_id, playdate_id, playdate_status)VALUES(@user_id, @pet_id, @playdate_id, '@status')", conn);
                     cmd.Parameters.AddWithValue("@user_id", userId);
                     cmd.Parameters.AddWithValue("@pet_id", petId);
                     cmd.Parameters.AddWithValue("@playdate_id", playdateId);
+                    cmd.Parameters.AddWithValue("@status", status);
 
                     int numberOfRows = cmd.ExecuteNonQuery();
                     if (numberOfRows > 0)

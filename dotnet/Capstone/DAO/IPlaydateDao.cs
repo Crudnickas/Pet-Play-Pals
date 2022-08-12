@@ -10,6 +10,6 @@ namespace Capstone.DAO
         List<PlayDate> GetPlayDatesByUser(int UserId);
         PlayDate GetPlayDateByPlayDateId(int PlayDateId);
         PlayDate CreatePlayDate(PlayDate newPlayDate);
-        bool CreateUserPetPlayDate(int userId, int petId, int playdateId);
+        bool CreateUserPetPlayDate(int userId, int petId, int playdateId,string status);
     }
 }

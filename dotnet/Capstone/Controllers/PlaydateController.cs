@@ -65,14 +65,15 @@ namespace Capstone.Controllers
                 return NotFound();
             }
         }
-        [HttpPost("/relationship")]
+        [HttpPost("relationship")]
         public ActionResult CreateUserPetPlayDateRelationship (UserPetPlayDate userPetPlayDate)
         {
             int petId = userPetPlayDate.PetID;
             //User user = userDao.GetUser(relationship.Username);
             int userId = userPetPlayDate.UserID;
             int playdateId = userPetPlayDate.PlayDateID;
-            bool wasSucessful = playdateDao.CreateUserPetPlayDate(userId, petId,playdateId);
+            string status = userPetPlayDate.PlayDateStatus;
+            bool wasSucessful = playdateDao.CreateUserPetPlayDate(userId, petId,playdateId,status);
             if (wasSucessful == true)
             {
                 return Ok();
