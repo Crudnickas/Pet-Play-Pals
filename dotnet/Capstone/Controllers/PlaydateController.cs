@@ -37,6 +37,53 @@ namespace Capstone.Controllers
             }
         }
 
+        [HttpGet("{id}")]
+        public ActionResult<PlayDate> GetPlayDateByPlayDateId(int id)
+        {
+            PlayDate playDateToReturn = null;
+            playDateToReturn = playdateDao.GetPlayDateByPlayDateId(id);
+            if (playDateToReturn != null)
+            {
+                return Ok(playDateToReturn);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+        [HttpPost()]
+        public ActionResult<PlayDate> CreatePlayDate(PlayDate newPlayDate)
+        {
+            PlayDate playDateToReturn = null;
+            playDateToReturn = playdateDao.CreatePlayDate(newPlayDate);
+            if (playDateToReturn != null)
+            {
+                return Created($"playdate/{playDateToReturn.PlayDateID}", playDateToReturn);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+        [HttpPost("relationship")]
+        public ActionResult CreateUserPetPlayDateRelationship (UserPetPlayDate userPetPlayDate)
+        {
+            int petId = userPetPlayDate.PetID;
+            //User user = userDao.GetUser(relationship.Username);
+            int userId = userPetPlayDate.UserID;
+            int playdateId = userPetPlayDate.PlayDateID;
+            string status = userPetPlayDate.PlayDateStatus;
+            bool wasSucessful = playdateDao.CreateUserPetPlayDate(userId, petId,playdateId,status);
+            if (wasSucessful == true)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
     }
 
 }

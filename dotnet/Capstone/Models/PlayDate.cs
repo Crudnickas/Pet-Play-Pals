@@ -9,7 +9,7 @@ namespace Capstone.Models
     {
         public int PlayDateID { get; set; }
         public int CreatorID { get; set; }
-        public string PetName { get; set; }
+       // public string PetName { get; set; }
         public string PlayParkAddress { get; set; }
 
         public string PlayParkName { get; set; }

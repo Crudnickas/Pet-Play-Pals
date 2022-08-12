@@ -2,7 +2,10 @@
 <form action="">
 <h2>Schedule a PlayDate:</h2>
 <div id="selectYourPet">
-<multiselect  id="pet" v-for="pet in pet" v-bind:key="pet.petId">
+ <label id="petDropDownLabel" for="petdropdown" class="sr-only">Select pets to attend playdate: </label>
+<multiselect  id="muliselectPetDropdown" v-for="pet in pet" v-bind:key="pet.petId"
+v-model="petArray"
+>
 
 </multiselect>
 </div>
@@ -22,6 +25,11 @@ export default {
 name: 'schedule-playdate-form',
 components:{
     Multiselect
+},
+data(){
+    return{
+    petArray:[],
+    }
 }
 }
 </script>
