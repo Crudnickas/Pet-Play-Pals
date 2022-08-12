@@ -47,9 +47,9 @@ namespace Capstone.DAO
         //    return returnPlaydates;
         //}
 
-        public List<PlayDate> GetPlayDatesByUser(int UserId)
+        public List<PlayDateResponse> GetPlayDatesByUser(int UserId)
         {
-            List<PlayDate> returnPlaydates = new List<PlayDate>();
+            List<PlayDateResponse> returnPlaydates = new List<PlayDateResponse>();
 
             try
             {
@@ -57,14 +57,23 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("SELECT playdates.playdate_id, playdates.creator_id, playdates.play_park_address, play_park_name, playdates.play_park_location_notes, playdates.playdate_time_date FROM playdates WHERE creator_id = @userId;", conn);
+                    SqlCommand cmd = new SqlCommand("SELECT pets.name, playdates.playdate_id, playdates.creator_id, playdates.play_park_address, play_park_name, playdates.play_park_location_notes, playdates.playdate_time_date FROM playdates JOIN user_pet_playdate ON playdates.playdate_id = user_pet_playdate.playdate_id JOIN pets ON user_pet_playdate.pet_id = pets.pet_id WHERE user_id = @userId;", conn);
                     cmd.Parameters.AddWithValue("@userId", UserId);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
                         PlayDate playdate = GetPlayDateFromReader(reader);
-                        returnPlaydates.Add(playdate);
+                        string petName = GetPetNameFromReader(reader);
+                        PlayDateResponse playDateResponse = new PlayDateResponse();
+                        playDateResponse.PetName = petName;
+                        playDateResponse.PlayDateID = playdate.PlayDateID;
+                        playDateResponse.CreatorID = playdate.CreatorID;
+                        playDateResponse.PlayParkAddress = playdate.PlayParkAddress;
+                        playDateResponse.PlayParkName = playdate.PlayParkName;
+                        playDateResponse.PlayParkLocationNotes = playdate.PlayParkLocationNotes;
+                        playDateResponse.PlayDateTimeDate = playdate.PlayDateTimeDate;
+                        returnPlaydates.Add(playDateResponse);
                     }
                 }
             }
@@ -118,12 +127,12 @@ namespace Capstone.DAO
                 cmd.Parameters.AddWithValue("@play_park_location_notes", newPlayDate.PlayParkLocationNotes);
                 cmd.Parameters.AddWithValue("@playdate_time_date", newPlayDate.PlayDateTimeDate);
                 cmd.Parameters.AddWithValue("@play_park_name", newPlayDate.PlayParkName);
-                newPlayDateId= Convert.ToInt32(cmd.ExecuteScalar());
+                newPlayDateId = Convert.ToInt32(cmd.ExecuteScalar());
             }
             returnPlayDate = GetPlayDateByPlayDateId(newPlayDateId);
             return returnPlayDate;
         }
-        public bool CreateUserPetPlayDate(int userId, int petId, int playdateId,string status)
+        public bool CreateUserPetPlayDate(int userId, int petId, int playdateId, string status)
         {
             bool isSucessful = false;
             try
@@ -163,7 +172,6 @@ namespace Capstone.DAO
             {
                 PlayDateID = Convert.ToInt32(reader["playdate_id"]),
                 CreatorID = Convert.ToInt32(reader["creator_id"]),
-                //PetName = Convert.ToString(reader["name"]),
                 PlayParkAddress = Convert.ToString(reader["play_park_address"]),
                 PlayParkName = Convert.ToString(reader["play_park_name"]),
                 PlayParkLocationNotes = Convert.ToString(reader["play_park_location_notes"]),
@@ -171,6 +179,14 @@ namespace Capstone.DAO
             };
 
             return p;
+        }
+        private string GetPetNameFromReader(SqlDataReader reader)
+        {
+            {
+                string PetName = Convert.ToString(reader["name"]);
+                return PetName;
+
+            }
         }
     }
 }
