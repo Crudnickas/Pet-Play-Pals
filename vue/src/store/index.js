@@ -199,6 +199,9 @@ export default new Vuex.Store({
     },
   SETPETTOPOST(state,pet) {
     state.petToPost = pet;
+  },
+  SAVE_PETS(state,pets){
+    state.pets.push(pets);
   }
   }
 })
