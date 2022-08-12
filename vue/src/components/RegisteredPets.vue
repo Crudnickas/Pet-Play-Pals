@@ -31,13 +31,15 @@ export default {
                 bio: "" }
             ],
             noPets: true,
-            isLoading: true
+            isLoading: true,
+           
 
         }
     },
   created() {
     PetService.getPets(this.$store.state.user.userId).then(response => {
       this.pet = response.data;
+      this.$store.commit("SAVE_PETS", this.pet)
       if(!(this.pet.length === 0)) {
         this.noPets = false;
       }
