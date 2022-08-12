@@ -1,29 +1,34 @@
 <template>
 <div>
 <global-menu/>
-<scheduled-play-dates/>
-<schedule-playdate-form/>
+<div id="playdates">
+    <scheduled-play-dates-detail/>
+<schedule-playdate-form/></div>
 </div>
 
   
 </template>
 
 <script>
-import ScheduledPlayDates from '../components/ScheduledPlayDates.vue'
+// import ScheduledPlayDates from '../components/ScheduledPlayDates.vue'
 import SchedulePlaydateForm from '../components/SchelduePlaydateForm.vue'
 import GlobalMenu from '../components/GlobalMenu.vue'
+import ScheduledPlayDatesDetail from '../components/ScheduledPlayDatesDetail.vue';
 
 export default {
      name: "play-dates",
      components: {
-         ScheduledPlayDates,
+        //  ScheduledPlayDates,
          SchedulePlaydateForm,
-         GlobalMenu
-
+         GlobalMenu,
+         ScheduledPlayDatesDetail
      }
 };
 </script>
 
 <style>
-
+#playdates {
+    display: flex;
+    justify-content: space-evenly;
+}
 </style>
