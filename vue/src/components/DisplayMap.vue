@@ -17,8 +17,8 @@
         
       ></gmap-marker>
     </gmap-map>
-    <input type="text" v-model="testPlace">
-    <p @click="alertFromAddress(testPlace)">Test Click</p>
+    <input type="text" v-model="testPlace" placeholder="Enter Address or City,State">
+    <input type ="button" value="Go to Location" @click="alertFromAddress(testPlace)">
 
   </div>
 </template>

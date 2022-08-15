@@ -31,6 +31,9 @@
     <div>
       <p>Location Notes: {{this.playDate.playParkLocationNotes}}</p>
       </div>
+      <div>
+        <p> Location Address: {{this.playDate.playParkAddress}}</p>
+        </div>
 
     <div>
       
