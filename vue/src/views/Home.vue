@@ -9,7 +9,7 @@
     </div>
     
     <div id="scheduled-playdates">
-    <scheduled-play-dates/>
+    <scheduled-play-dates :key="$route.fullPath"/>
     </div>
     
     </div>
