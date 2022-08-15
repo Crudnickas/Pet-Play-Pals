@@ -68,8 +68,8 @@ INSERT INTO users (username, password_hash, salt, user_role) VALUES ('user','Jg4
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
 
 
-INSERT INTO pets (name,age,size,breed,temperament,energy,bio) VALUES ('Buddy','Puppy','Small','Beagle','Aggressive','Medium','Stupid Little Dog :)')
-INSERT INTO pets (name,age,size,breed,temperament,energy,bio) VALUES ('TuffDude','Adult','Mini','Beagle','Aggressive','Medium','Stupid Tiny Dog :)')
+INSERT INTO pets (name,age,size,breed,temperament,energy,bio,image_url) VALUES ('Buddy','Puppy','Small','Beagle','Aggressive','Medium','Stupid Little Dog :)','https://www.aspca.org/sites/default/files/dog-care_general-dog-care_main-image.jpg')
+INSERT INTO pets (name,age,size,breed,temperament,energy,bio,image_url) VALUES ('TuffDude','Adult','Mini','Beagle','Aggressive','Medium','Stupid Tiny Dog :)','https://i.guim.co.uk/img/media/684c9d087dab923db1ce4057903f03293b07deac/205_132_1915_1150/master/1915.jpg?width=1300&quality=85&fit=max&s=cdc815403c8439cc038fdceefbeb4769')
 
 INSERT INTO user_pet(user_id,pet_id) VALUES (1,1)
 INSERT INTO user_pet(user_id,pet_id) VALUES (1,2)
