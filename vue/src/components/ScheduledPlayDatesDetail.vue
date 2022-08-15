@@ -2,11 +2,10 @@
     <div id="playdates-container">
     <h1>Your Upcoming Playdates</h1>
     <div id="playdate-div" v-for="playDate in playDate" v-bind:key="playDate.Id">
-        <b>PlayDate ID:</b> {{playDate.playDateID}}<br><br>
-        <b>Pet Name:</b> {{playDate.petName}}<br><br>
-        <b>Date and Time:</b> {{playDate.playDateTimeDate}}<br><br>
-        <b>Play Date Location:</b> {{playDate.playParkName}}<br><br>
-        <b>Play Date Address:</b> {{playDate.playParkAddress}}<br><br>
+        <div id="thumbnail-div"><img id="thumbnail" :src="playDate.imageURL"><br>
+        <b>{{playDate.petName}}</b></div>
+        <b>Date & Time:</b> {{playDate.playDateTimeDate}}<br>
+        <b>Location:</b> {{playDate.playParkName}} ({{playDate.playParkAddress}})<br>
         <b>Location Notes:</b> {{playDate.playParkLocationNotes}}
     </div>
     </div>
@@ -22,6 +21,7 @@ export default {
         playDate: [
             {
                 playDateID:0,
+                imageURL: "",
                 creatorID:0,
                 petName:"",
                 playParkAddress:"",
@@ -56,5 +56,11 @@ export default {
     text-align: left;
     padding: 15px;
 }
-
+#thumbnail-div {
+    text-align: center;
+}
+#thumbnail {
+    height: 100px;
+    width: auto;
+}
 </style>

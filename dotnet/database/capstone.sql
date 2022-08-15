@@ -33,6 +33,7 @@ CREATE TABLE pets (
 	temperament varchar(200) NOT NULL,
 	energy varchar(50) NOT NULL, 
 	bio varchar(200) NOT NULL,
+	image_url varchar(200) NOT NULL,
 	CONSTRAINT PK_pet PRIMARY KEY (pet_id)
 )
 CREATE TABLE user_pet

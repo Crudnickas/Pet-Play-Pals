@@ -56,7 +56,7 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("SELECT pets.pet_id, pets.name, pets.age,pets.size,pets.breed,pets.temperament,pets.energy,pets.bio FROM pets JOIN user_pet  ON pets.pet_id = user_pet.pet_id JOIN users ON user_pet.user_id = users.user_id WHERE users.user_id = @userId", conn);
+                    SqlCommand cmd = new SqlCommand("SELECT pets.pet_id, pets.name, pets.age,pets.size,pets.breed,pets.temperament,pets.energy,pets.image_url,pets.bio FROM pets JOIN user_pet  ON pets.pet_id = user_pet.pet_id JOIN users ON user_pet.user_id = users.user_id WHERE users.user_id = @userId", conn);
                     cmd.Parameters.AddWithValue("@userId", UserId);
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -84,7 +84,7 @@ namespace Capstone.DAO
             {
 
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("INSERT INTO pets (name,age,size,breed,temperament,energy,bio) OUTPUT INSERTED.pet_id VALUES (@name, @age, @size, @breed, @temperament, @energy, @bio)", conn);
+                SqlCommand cmd = new SqlCommand("INSERT INTO pets (name,age,size,breed,temperament,energy,bio,image_url) OUTPUT INSERTED.pet_id VALUES (@name, @age, @size, @breed, @temperament, @energy, @bio, @imageURL)", conn);
                 cmd.Parameters.AddWithValue("@name", newPet.Name);
                 cmd.Parameters.AddWithValue("@age", newPet.Age);
                 cmd.Parameters.AddWithValue("@size", newPet.Size);
@@ -92,6 +92,7 @@ namespace Capstone.DAO
                 cmd.Parameters.AddWithValue("@temperament", newPet.Temperament);
                 cmd.Parameters.AddWithValue("@energy", newPet.Energy);
                 cmd.Parameters.AddWithValue("@bio", newPet.Bio);
+                cmd.Parameters.AddWithValue("@imageURL", newPet.ImageURL);
                 newPetId = Convert.ToInt32(cmd.ExecuteScalar());
             }
             returnPet = GetPetByPetId(newPetId);
@@ -135,6 +136,7 @@ namespace Capstone.DAO
                 Breed = Convert.ToString(reader["breed"]),
                 Temperament = Convert.ToString(reader["temperament"]),
                 Energy = Convert.ToString(reader["energy"]),
+                ImageURL = Convert.ToString(reader["image_url"]),
                 Bio = Convert.ToString(reader["bio"])
 
             };

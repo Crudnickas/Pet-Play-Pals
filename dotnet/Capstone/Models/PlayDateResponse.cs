@@ -18,5 +18,8 @@ namespace Capstone.Models
         public DateTime PlayDateTimeDate { get; set; }
 
         public string PetName { get; set; }
+
+        public string ImageURL { get; set; }
+
     }
 }

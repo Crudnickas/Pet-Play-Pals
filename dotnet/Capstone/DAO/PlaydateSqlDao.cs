@@ -57,7 +57,7 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("SELECT pets.name, playdates.playdate_id, playdates.creator_id, playdates.play_park_address, play_park_name, playdates.play_park_location_notes, playdates.playdate_time_date FROM playdates JOIN user_pet_playdate ON playdates.playdate_id = user_pet_playdate.playdate_id JOIN pets ON user_pet_playdate.pet_id = pets.pet_id WHERE user_id = @userId;", conn);
+                    SqlCommand cmd = new SqlCommand("SELECT pets.image_url, pets.name, playdates.playdate_id, playdates.creator_id, playdates.play_park_address, play_park_name, playdates.play_park_location_notes, playdates.playdate_time_date FROM playdates JOIN user_pet_playdate ON playdates.playdate_id = user_pet_playdate.playdate_id JOIN pets ON user_pet_playdate.pet_id = pets.pet_id WHERE user_id = @userId;", conn);
                     cmd.Parameters.AddWithValue("@userId", UserId);
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -65,7 +65,9 @@ namespace Capstone.DAO
                     {
                         PlayDate playdate = GetPlayDateFromReader(reader);
                         string petName = GetPetNameFromReader(reader);
+                        string imageURL = GetImageURLFromReader(reader);
                         PlayDateResponse playDateResponse = new PlayDateResponse();
+                        playDateResponse.ImageURL = imageURL;
                         playDateResponse.PetName = petName;
                         playDateResponse.PlayDateID = playdate.PlayDateID;
                         playDateResponse.CreatorID = playdate.CreatorID;
@@ -185,7 +187,14 @@ namespace Capstone.DAO
             {
                 string PetName = Convert.ToString(reader["name"]);
                 return PetName;
+            }
+        }
 
+        private string GetImageURLFromReader(SqlDataReader reader)
+        {
+            {
+                string ImageURL = Convert.ToString(reader["image_url"]);
+                return ImageURL;
             }
         }
     }

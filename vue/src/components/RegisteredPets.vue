@@ -6,7 +6,7 @@
         <p><router-link v-show="noPets" v-bind:to="{ name: 'addpet' }">Click here to add a pet</router-link></p>
     </div>
     <div id="pets" v-show="!noPets">
-    <div id="pet" v-for="pet in pet" v-bind:key="pet.petId"><b><em>{{pet.name}},</em></b> {{pet.breed}} ({{pet.age}})</div>
+    <div id="pet" v-for="pet in pet" v-bind:key="pet.petId"><img id="thumbnail" :src="pet.imageURL"><br><b><em>{{pet.name}},</em></b> {{pet.breed}} ({{pet.age}})<br><br></div>
     <p><router-link v-bind:to="{ name: 'addpet' }">Click here to add a pet</router-link></p>
     </div>
 
@@ -28,6 +28,7 @@ export default {
                 breed: "",
                 temperament: "",
                 energy: "",
+                imageURL: "",
                 bio: "" }
             ],
             noPets: true,
@@ -56,6 +57,11 @@ pet {
 }
 
 #isLoading > img {
+  height: 100px;
+  width: auto;
+}
+
+#thumbnail {
   height: 100px;
   width: auto;
 }
