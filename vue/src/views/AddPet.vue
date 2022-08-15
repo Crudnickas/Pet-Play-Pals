@@ -3,7 +3,7 @@
 <global-menu/>
 <pet-register/>
 <div id= "AddPetSubmitCancel">
-<button class = "submitButton" type="submit" value="Submit" v-on:click="addNewPet">Submit</button>
+<button class = "submitButton" type="submit" value="Submit" v-on:click="addNewPet">Submit</button>&nbsp; 
 <button type="cancel" value="Cancel" v-on:click ="cancelButton">Cancel</button>
 </div>
 </div>
