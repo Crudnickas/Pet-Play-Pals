@@ -18,6 +18,7 @@
     "vue-multiselect": "^2.1.6",
     "vue-router": "^3.5.1",
     "vue2-datepicker": "^3.11.0",
+    "vue2-google-maps": "^0.10.7",
     "vuejs-datepicker": "^1.6.2",
     "vuex": "^3.6.2"
   },

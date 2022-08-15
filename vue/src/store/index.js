@@ -71,7 +71,7 @@ export default new Vuex.Store({
       {
         PlayParkName: "Splash Zone Dog Park",
         PlayParkAddress: "95 W. Hamilton Rd., Oberlin, OH 44074",
-        PlayParkLocationNotes: "ocated behind Splash Zone and open during Splash Zone’s open hours. The park sits on one acre and features two separate areas for large dogs and small dogs with one main entrance. Features include a shelter, shade trees, benches, and drinking fountain."
+        PlayParkLocationNotes: "Located behind Splash Zone and open during Splash Zone’s open hours. The park sits on one acre and features two separate areas for large dogs and small dogs with one main entrance. Features include a shelter, shade trees, benches, and drinking fountain."
       },
       {
         PlayParkName: "Austintown Township Dog Park",

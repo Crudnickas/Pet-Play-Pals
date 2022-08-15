@@ -9,6 +9,7 @@ import AddPet from '../views/AddPet.vue'
 import PlayDates from '../views/PlayDates.vue'
 import FileUpload from '../components/FileUpload.vue'
 import ScheduledPlayDatesDetail from '../components/ScheduledPlayDatesDetail.vue'
+import MapView from '../views/MapView.vue'
 
 Vue.use(Router)
 
@@ -77,6 +78,14 @@ const router = new Router({
       path: "/fileupload",
       name: "fileupload",
       component: FileUpload,
+      meta: {
+        requiresAuth: true
+      },
+    },
+    {
+      path: "/map",
+      name: "map",
+      component: MapView,
       meta: {
         requiresAuth: true
       },
