@@ -19,12 +19,12 @@
         <div>
 
         <label for="playDateLocation" class="sr-only">Select the location for the playdate: </label>
-        <select name="playDateLocation" id="playDateLocation" v-model="SelectedLocation" > 
+        <select name="playDateLocation" id="playDateLocation" v-model="SelectedName" v-on:change="mappingSelectedLocation"> 
         <option disabled value = ""> Please Select one </option>
         <option
-      v-for="location in $store.state. playDateLocations"
+      v-for="location in $store.state.playDateLocations"
       v-bind:key="location.id">
-     <b><em> {{location.PlayParkName}},    </em></b>{{location.PlayParkAddress}} 
+    {{location.PlayParkName}}
     </option>
     </select>
     </div>
@@ -46,7 +46,8 @@
 
     
       
-      <button type="submit" v-on:click.prevent="submitPlaydate">Submit</button>
+      <button type="submit" v-on:click.prevent="submitPlaydate">Submit</button>&nbsp; 
+      <button type="cancel" v-on:click.prevent="resetForm">Cancel</button>
 
  
    
@@ -61,6 +62,7 @@ import Multiselect from 'vue-multiselect'
 import PetService from '../services/PetService';
 import DatePicker from 'vue2-datepicker';
 import 'vue2-datepicker/index.css';
+import PlayDateServices from '../services/PlayDateServices';
 
 
 
@@ -84,6 +86,7 @@ data(){
                 energy: "",
                 bio: "" }
             ],
+            SelectedName: "",
          SelectedLocation : {
         PlayParkName: "",
         PlayParkAddress: "",
@@ -95,9 +98,15 @@ data(){
           creatorID:0,
           playParkAddress: "",
           playParkName: "",
-          playParkNotes: "",
+          playParkLocationNotes: "",
           playDateTimeDate: "",
 
+      },
+      userPetPlaydateRelationship: {
+      userID: 0,
+      playDateID: 0,
+      petID: 0,
+      playDateStatus: "Pending"
       }
      
     
@@ -108,21 +117,81 @@ data(){
 methods:{
     changingArrayToString(){
         this.pets.name=this.selectedPetArray.join(',');
+      
     },
     
 
     submitPlaydate(){
-              console.log(this.datetime);
-              console.log(Date.parse(this.datetime));
-              console.log(Date.parse(this.datetime).getMonth());
-    }
+      this.creatorID = this.$store.state.user.userId;
+      PlayDateServices.createPlayDate(this.playDate)
+      .then((response)=> {
+        console.log("running");
+        if(response.status === 201){
+           this.playDate.playDateID= response.data.playDateID;
+        
+
+        this.selectedPetArray.forEach((element) =>{
+        this.userPetPlaydateRelationship.playDateID=this.playDate.playDateID;
+        this.userPetPlaydateRelationship.petID=element.petId;
+        PlayDateServices.createrUserPlaydateRelationship(this.userPetPlaydateRelationship).then((response)=> {
+          if(response.status === 200 ){
+           console.log(`Successfully Added ${element.name}`);
+          
+          }
+
+        })
+
+      
+          
+        });
+        alert("Your Playdate was successfully added! ")
+          this.$router.push({
+                path: '/',
+
+              });
+        
+
+        }
+      }).catch((error)=>{
+        const response = error.response;
+        if(response.status === 404){
+          this.errorMessage=error.message;
+        }
+
+      });
+    },
+    mappingSelectedLocation(){
+      this.SelectedLocation = this.$store.state.playDateLocations.filter((element)=> {
+       return element.PlayParkName == this.SelectedName;
+
+      })
+      this.playDate.playParkAddress = this.SelectedLocation[0].PlayParkAddress;
+      console.log(this.SelectedLocation[0].PlayParkAddress)
+      this.playDate.playParkName = this.SelectedLocation[0].PlayParkName;
+      this.playDate.playParkLocationNotes = this.SelectedLocation[0].PlayParkLocationNotes;
+      console.log("method ran")
+
+    
+},
+
+    resetForm() {
+      this.playDate = {};
+      this.SelectedName ="";
+      this.selectedPetArray= [];
+    },
+ 
+
 },
  created() {
     PetService.getPets(this.$store.state.user.userId).then(response => {
       this.pets = response.data;
+       this.playDate.creatorID = this.$store.state.user.userId;
+        this.userPetPlaydateRelationship.userID = this.$store.state.user.userId;
     });
+  
 
-}
+},
+
 }
 
 </script>
@@ -131,7 +200,7 @@ methods:{
 
 <style>
 .multiselect{
-width:20%;
+width:40%;
 color:#878357;
 margin-right: 5px;
 }
