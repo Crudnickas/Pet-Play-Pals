@@ -20,6 +20,8 @@ namespace Capstone.Models
 
         public string Energy { get; set; }
 
+        public string ImageURL { get; set; }
+
         public string Bio { get; set; }
 
     }

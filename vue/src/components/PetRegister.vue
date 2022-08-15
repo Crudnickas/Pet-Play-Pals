@@ -76,6 +76,13 @@
     </select>
     </div>
     <br>
+
+    <div>
+    <label for="petImage">Pet Image URL: </label>
+    <input type="text" v-model="pet.imageURL" v-on:change="copyPetToStore">
+    </div>
+    <br>
+
     <label for="petBio">Enter Pet Bio Here: </label>
 
 <textarea id="petBio" name="petBio" v-model="pet.bio" v-on:change="copyPetToStore">
@@ -116,6 +123,7 @@ data(){
             breed:"",
             temperament: "",
             energy:"",
+            imageURL: "",
             bio:""
         },
         showPetForm: false,      
