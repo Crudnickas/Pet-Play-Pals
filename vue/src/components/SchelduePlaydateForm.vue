@@ -23,12 +23,18 @@
         <option disabled value = ""> Please Select one </option>
         <option
       v-for="location in $store.state.playDateLocations"
-      v-bind:key="location.id">
-    {{location.PlayParkName}}
+      v-bind:key="location.id" >
+    {{location.PlayParkName}} 
     </option>
     </select>
     </div>
-   
+    <div>
+      <p>Location Notes: {{this.playDate.playParkLocationNotes}}</p>
+      </div>
+
+    <div>
+      
+    </div>
     <div id="datepicker">
    <label for="picker1" class="col-sm-3 control-label">
     Select Date and Time of PlayDate:
@@ -169,7 +175,7 @@ methods:{
       console.log(this.SelectedLocation[0].PlayParkAddress)
       this.playDate.playParkName = this.SelectedLocation[0].PlayParkName;
       this.playDate.playParkLocationNotes = this.SelectedLocation[0].PlayParkLocationNotes;
-      console.log("method ran")
+      
 
     
 },
