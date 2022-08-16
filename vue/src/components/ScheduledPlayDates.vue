@@ -5,7 +5,9 @@
         <div id="isLoading" v-if="isLoading"><img src="https://c.tenor.com/qmg1JQ82uWAAAAAj/oxo-perros-cute.gif" /></div>
         <div id="noPlayDate" v-show="noPlayDate">You currently have no scheduled Playdates</div>
         <div v-show="!noPlayDate">
-        <div v-for="pd in playDate" v-bind:key="pd.Id"><b><em>{{pd.playParkName}},</em></b> {{formatDate(pd.playDateTimeDate)}} ({{pd.petName}})</div>
+        <div v-for="pd in playDate" v-bind:key="pd.Id"><b><em>{{pd.playParkName}},</em></b> {{pd.playDateTimeDate}} ({{pd.petName}})
+        <!-- {{formatDate(pd.playDateTimeDate)}} -->
+        </div>
         </div>
     </div>
     <br><br><br>
@@ -53,7 +55,10 @@ data(){
 methods: {
     formatDate(dateToBeFormatted) {
         const date = new Date(dateToBeFormatted);
-        return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+        let suffix = date.getHours() >= 12 ? "PM" : "AM";
+        let hours = ((date.getHours()) % 12) + suffix;
+        return `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()} @ ${date.getHours()} ${hours}`;
+        // getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
     }
 }
 }
