@@ -9,13 +9,24 @@
 </template>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+div{
+  border-radius: 10px;
+}
 body {
 background-color:#F0EEE4;
 color: #878357;
 font-family: 'Poppins', sans-serif;
 }
+
 a:link {
   color: #878357
+  
+}
+a:visited{
+color:rgb(78, 41, 14)
+}
+img{
+  border-radius: 50%;
 }
 </style>
 

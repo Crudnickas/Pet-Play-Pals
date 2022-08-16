@@ -57,7 +57,7 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("SELECT pets.image_url, pets.name, playdates.playdate_id, playdates.creator_id, playdates.play_park_address, play_park_name, playdates.play_park_location_notes, playdates.playdate_time_date FROM playdates JOIN user_pet_playdate ON playdates.playdate_id = user_pet_playdate.playdate_id JOIN pets ON user_pet_playdate.pet_id = pets.pet_id WHERE user_id = @userId ORDER BY playdates.playdate_time_date DESC;", conn);
+                    SqlCommand cmd = new SqlCommand("SELECT pets.image_url, pets.name, playdates.playdate_id, playdates.creator_id, playdates.play_park_address, play_park_name, user_pet_playdate.playdate_status ,playdates.play_park_location_notes, playdates.playdate_time_date FROM playdates JOIN user_pet_playdate ON playdates.playdate_id = user_pet_playdate.playdate_id JOIN pets ON user_pet_playdate.pet_id = pets.pet_id WHERE user_id = @userId ORDER BY playdates.playdate_time_date DESC;", conn);
                     cmd.Parameters.AddWithValue("@userId", UserId);
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -66,15 +66,18 @@ namespace Capstone.DAO
                         PlayDate playdate = GetPlayDateFromReader(reader);
                         string petName = GetPetNameFromReader(reader);
                         string imageURL = GetImageURLFromReader(reader);
+                        string status = GetStatusFromReader(reader);
                         PlayDateResponse playDateResponse = new PlayDateResponse();
                         playDateResponse.ImageURL = imageURL;
                         playDateResponse.PetName = petName;
+                        playDateResponse.Status = status;
                         playDateResponse.PlayDateID = playdate.PlayDateID;
                         playDateResponse.CreatorID = playdate.CreatorID;
                         playDateResponse.PlayParkAddress = playdate.PlayParkAddress;
                         playDateResponse.PlayParkName = playdate.PlayParkName;
                         playDateResponse.PlayParkLocationNotes = playdate.PlayParkLocationNotes;
                         playDateResponse.PlayDateTimeDate = playdate.PlayDateTimeDate;
+                     
                         returnPlaydates.Add(playDateResponse);
                     }
                 }
@@ -201,7 +204,7 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("SELECT playdates.play_park_name, playdates.play_park_address, playdates.playdate_id, playdates.creator_id,playdates.playdate_time_date, playdates.play_park_location_notes, pets.name, pets.image_url from playdates JOIN user_pet_playdate ON playdates.playdate_id = user_pet_playdate.playdate_id JOIN pets ON user_pet_playdate.pet_id = pets.pet_id WHERE user_pet_playdate.playdate_status = @playdate_status;", conn);
+                    SqlCommand cmd = new SqlCommand("SELECT playdates.play_park_name, playdates.play_park_address, playdates.playdate_id, playdates.creator_id,playdates.playdate_time_date, playdates.play_park_location_notes, pets.name, pets.image_url,user_pet_playdate.playdate_status from playdates JOIN user_pet_playdate ON playdates.playdate_id = user_pet_playdate.playdate_id JOIN pets ON user_pet_playdate.pet_id = pets.pet_id WHERE user_pet_playdate.playdate_status = @playdate_status;", conn);
                     cmd.Parameters.AddWithValue("@playdate_status", status);
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -210,8 +213,10 @@ namespace Capstone.DAO
                         PlayDate playdate = GetPlayDateFromReader(reader);
                         string petName = GetPetNameFromReader(reader);
                         string imageURL = GetImageURLFromReader(reader);
+                        string playDateStatus = GetStatusFromReader(reader);
                         PlayDateResponse playDateResponse = new PlayDateResponse();
                         playDateResponse.ImageURL = imageURL;
+                        playDateResponse.Status = playDateStatus;
                         playDateResponse.PetName = petName;
                         playDateResponse.PlayDateID = playdate.PlayDateID;
                         playDateResponse.CreatorID = playdate.CreatorID;
@@ -260,6 +265,13 @@ namespace Capstone.DAO
             {
                 string ImageURL = Convert.ToString(reader["image_url"]);
                 return ImageURL;
+            }
+        }
+        private string GetStatusFromReader(SqlDataReader reader)
+        {
+            {
+                string Status = Convert.ToString(reader["playdate_status"]);
+                return Status;
             }
         }
     }
