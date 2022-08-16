@@ -67,14 +67,14 @@ namespace Capstone.Controllers
             }
         }
         [HttpPost("relationship")]
-        public ActionResult CreateUserPetPlayDateRelationship (UserPetPlayDate userPetPlayDate)
+        public ActionResult CreateUserPetPlayDateRelationship(UserPetPlayDate userPetPlayDate)
         {
             int petId = userPetPlayDate.PetID;
             //User user = userDao.GetUser(relationship.Username);
             int userId = userPetPlayDate.UserID;
             int playdateId = userPetPlayDate.PlayDateID;
             string status = userPetPlayDate.PlayDateStatus;
-            bool wasSucessful = playdateDao.CreateUserPetPlayDate(userId, petId,playdateId,status);
+            bool wasSucessful = playdateDao.CreateUserPetPlayDate(userId, petId, playdateId, status);
             if (wasSucessful == true)
             {
                 return Ok();
@@ -97,6 +97,23 @@ namespace Capstone.Controllers
             else
             {
                 return BadRequest();
+            }
+        }
+
+        [HttpGet("status/{status}")]
+        public ActionResult<IList<PlayDateResponse>> GetPlayDatesByStatus(string status)
+        {
+            string statusToInput = status;
+            IList<PlayDateResponse> playdatesToReturn = new List<PlayDateResponse>();
+            playdatesToReturn = playdateDao.GetPlayDatesByStatus(statusToInput);
+
+            if (playdatesToReturn != null)
+            {
+                return Ok(playdatesToReturn);
+            }
+            else
+            {
+                return NotFound();
             }
         }
 

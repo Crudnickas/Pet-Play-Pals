@@ -18,6 +18,9 @@ export default {
     return axios.post('/playdate/relationship',userpetplaydate)
 
   },
+  getPlayDatesByStatus(playdatestatus){
+    return axios.get(`playdate/status/${playdatestatus}`)
+  }
 
 
 

@@ -13,5 +13,6 @@ namespace Capstone.DAO
         bool CreateUserPetPlayDate(int userId, int petId, int playdateId,string status);
 
         bool UpdateUserPlayDateStatus(UserPetPlayDate userplaydate);
+        List<PlayDateResponse> GetPlayDatesByStatus(string status);
     }
 }

@@ -190,6 +190,45 @@ namespace Capstone.DAO
             }
             return isSucessful;
         }
+        public List<PlayDateResponse> GetPlayDatesByStatus(string status)
+        {
+            List<PlayDateResponse> returnPlaydates = new List<PlayDateResponse>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("SELECT playdates.play_park_name, playdates.play_park_address, playdates.playdate_id, playdates.creator_id,playdates.playdate_time_date, playdates.play_park_location_notes, pets.name, pets.image_url from playdates JOIN user_pet_playdate ON playdates.playdate_id = user_pet_playdate.playdate_id JOIN pets ON user_pet_playdate.pet_id = pets.pet_id WHERE user_pet_playdate.playdate_status = @playdate_status;", conn);
+                    cmd.Parameters.AddWithValue("@playdate_status", status);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        PlayDate playdate = GetPlayDateFromReader(reader);
+                        string petName = GetPetNameFromReader(reader);
+                        string imageURL = GetImageURLFromReader(reader);
+                        PlayDateResponse playDateResponse = new PlayDateResponse();
+                        playDateResponse.ImageURL = imageURL;
+                        playDateResponse.PetName = petName;
+                        playDateResponse.PlayDateID = playdate.PlayDateID;
+                        playDateResponse.CreatorID = playdate.CreatorID;
+                        playDateResponse.PlayParkAddress = playdate.PlayParkAddress;
+                        playDateResponse.PlayParkName = playdate.PlayParkName;
+                        playDateResponse.PlayParkLocationNotes = playdate.PlayParkLocationNotes;
+                        playDateResponse.PlayDateTimeDate = playdate.PlayDateTimeDate;
+                        returnPlaydates.Add(playDateResponse);
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+
+            return returnPlaydates;
+        }
 
 
 
