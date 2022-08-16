@@ -1,6 +1,6 @@
 <template>
 <form class = "playdate-register">
-<h2>Schedule a PlayDate:</h2>
+<h1>Schedule a PlayDate:</h1>
 <div id="selectYourPet">
  <label id="petDropDownLabel" for="petdropdown" class="sr-only">Select pets to attend playdate:  </label>
 

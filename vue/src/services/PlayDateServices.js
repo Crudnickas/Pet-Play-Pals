@@ -20,7 +20,11 @@ export default {
   },
   getPlayDatesByStatus(playdatestatus){
     return axios.get(`playdate/status/${playdatestatus}`)
+  },
+  updateUserPlayDateStatus(playdatetoPut){
+    return axios.put(`/playdate/relationship/${playdatetoPut.playDateID}`,playdatetoPut)
   }
+
 
 
 

@@ -12,7 +12,9 @@
     </div>
     <br><br><br>
     <div id="see-all-link">
-        <router-link v-bind:to="{ name: 'playdates' }">Click Here to see All Scheduled Playdates</router-link>
+        <router-link v-bind:to="{ name: 'playdates' }">Click Here to see All Playdates</router-link>
+        <br>
+        <router-link v-bind:to="{name: 'available-playDates'}"> Click Here to Browse Available Playdates</router-link>
     </div>
 </div>
 </template>
@@ -33,7 +35,8 @@ data(){
                 playParkAddress:"",
                 playParkName:"",
                 PlayParkLocationNotes:"",
-                PlayDateTimeDate: 0
+                PlayDateTimeDate: 0,
+                status: ""
                 
             }
             
@@ -46,6 +49,9 @@ data(){
   created() {
     PlayDateServices.getPlayDatesByUser(this.$store.state.user.userId).then(response => {
       this.playDate = response.data;
+      this.playDate=this.playDate.filter((element)=>{
+          return element.status == 'Joined';
+      })
       if(!(this.playDate.length === 0)) {
         this.noPlayDate = false;
       }
@@ -69,6 +75,9 @@ methods: {
 a:link {
     color: #F0EEE4;
     font-weight: bold;
+}
+a:visited{
+    color:rgb(78, 41, 14)
 }
 
 #bacon-salad {

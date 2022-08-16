@@ -24,5 +24,11 @@ export default {
 </script>
 
 <style>
+#availableplaydates
+{
+    display: flex;
+    justify-content: space-evenly;
+}
+
 
 </style>
