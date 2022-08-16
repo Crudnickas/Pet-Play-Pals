@@ -5,8 +5,8 @@
   <div id="menu-list" v-if="showForm">
     <h2><router-link v-bind:to="{ name: 'home' }">HOME</router-link></h2>
     <h2><router-link v-bind:to="{ name: 'addpet' }">REGISTER A PET</router-link></h2>
-    <h2>USER PROFILE</h2>
-    <h2><router-link v-bind:to="{ name: 'playdates' }"> POTENTIAL PLAYDATES</router-link></h2>
+    <h2><router-link v-bind:to="{ name: 'user-profile' }">USER PROFILE</router-link></h2>
+    <h2><router-link v-bind:to="{ name: 'playdates' }">PLAYDATES</router-link></h2>
     <h2><router-link v-bind:to="{name:'available-playDates'}">BROWSE AVAILABLE PLAYDATES</router-link></h2>
     <h2><router-link v-bind:to="{ name: 'map' }">MAP</router-link></h2>
     <h2><router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">LOGOUT</router-link></h2>

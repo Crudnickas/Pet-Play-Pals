@@ -34,6 +34,22 @@ namespace Capstone.Controllers
                 return NotFound();
             }
         }
+
+        [HttpPut("{id}")]
+        public ActionResult UpdatePet(int id, Pet updatedPet)
+        {
+            int playdateId = id;
+            bool wasSucessful = petDao.UpdatePet(updatedPet);
+            if (wasSucessful == true)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpPost("/relationship")]
         public ActionResult CreatePetRelationship(Relationship relationship)
         {
