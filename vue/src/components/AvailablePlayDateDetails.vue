@@ -1,7 +1,7 @@
 <template>
 <div>
     <div id="selectYourPet">
- <label id="petDropDownLabel" for="petdropdown" class="sr-only">Select pets to Join playdate:  </label>
+ <label id="petDropDownLabel" for="petdropdown" class="sr-only">Select the pet(s) you would like to join a playdate:  </label>
 
    <multiselect id ="multiselectTempDropdown"
           v-model=" selectedPetArray"
@@ -74,6 +74,12 @@ export default {
                 energy: "",
                 bio: "" }
             ],
+             userPetPlaydateRelationship: {
+      userID: 0,
+      playDateID: 0,
+      petID: 0,
+      playDateStatus: "Joined"
+      }
               
         }
 
@@ -84,6 +90,24 @@ export default {
             PlayDateServices.updateUserPlayDateStatus(this.playDateRelationshipToPut)
             .then((response)=> {
                 if(response.status === 200) {
+
+            this.playDate.playDateID= response.data.playDateID;
+        
+
+        this.selectedPetArray.forEach((element) =>{
+        this.userPetPlaydateRelationship.playDateID=playDateID;
+        this.userPetPlaydateRelationship.petID=element.petId;
+        PlayDateServices.createrUserPlaydateRelationship(this.userPetPlaydateRelationship).then((response)=> {
+          if(response.status === 200 ){
+           console.log(`Successfully Added ${element.name}`);
+          
+          }
+
+        })
+
+      
+          
+        });
                     alert("You have joined");
                      this.$router.push({
                 path: '/',
