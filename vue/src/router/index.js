@@ -11,8 +11,6 @@ import FileUpload from '../components/FileUpload.vue'
 import ScheduledPlayDatesDetail from '../components/ScheduledPlayDatesDetail.vue'
 import MapView from '../views/MapView.vue'
 import AvailablePlayDates from '../views/AvailablePlayDates.vue'
-import UserProfile from '../views/UserProfile.vue'
-import EditPet from '../views/EditPet.vue'
 
 
 Vue.use(Router)
@@ -110,25 +108,8 @@ const router = new Router({
         requiresAuth: true
       }
       
-    },
-    {
-      path: "/userprofile",
-      name: "user-profile",
-      component: UserProfile,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
-      path: "/editpet",
-      name: "edit-pet",
-      component: EditPet,
-      meta: {
-        requiresAuth: true
-      }
-    },
+    }
 
-    
   ]
 })
 
