@@ -10,7 +10,7 @@ namespace Capstone.DAO
         List<Pet> GetPetByUser(int userId);
         Pet GetPetByPetId(int PetId);
         Pet CreatePet(Pet newPet);
-        public bool UpdatePet(Pet updatedPet);
+
         bool CreatePetUser(int userId, int petId);
     }
 }

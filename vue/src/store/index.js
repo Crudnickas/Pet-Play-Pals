@@ -27,7 +27,6 @@ export default new Vuex.Store({
     pets: [],
     userRegisteredPets: [],
     petToPost: {},
-    usernameToPost: "",
     playDateLocations: [
       {
         PlayParkName: "Peppy Paws Pooch Park, LLC",
@@ -204,11 +203,6 @@ export default new Vuex.Store({
   },
   SAVE_PETS(state,pets){
     state.pets.push(pets);
-  },
-    // SETUSERNAMETOPOST(state, username) {
-  //   state.usernameToPost = username;
-  //    THIS NEEDS COMPLETED!
-  // }
-  // }
+  }
   }
 })

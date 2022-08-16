@@ -105,10 +105,3 @@ Update user_pet_playdate SET playdate_status = 'Joined' WHERE playdate_id = 2;
 SELECT * from playdates Where playdate_id = @playdate_id";
 
 SELECT playdates.play_park_name, playdates.play_park_address, playdates.playdate_id, playdates.creator_id,playdates.playdate_time_date, playdates.play_park_location_notes from playdates JOIN user_pet_playdate ON playdates.playdate_id = user_pet_playdate.playdate_id WHERE user_pet_playdate.playdate_status = 'Joined';
-
-INSERT INTO pets(name, age, size, breed, temperament, energy, bio, image_url)
-	VALUES('Jett', 'Adult', 'Mini', 'Pomeranian', 'Anxious', 'Low', 'The Best Boi', 'http://google.com');
-
-	SELECT * FROM PETS;
-
-Update pet SET name = 'XYZ', age = 'XYZ', size = 'XYZ', breed = 'XYZ', temperament = 'XYZ', energy = 'XYZ', bio = 'XYZ', image_url = 'XYZ'  WHERE pet_id = @pet_id;
