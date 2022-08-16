@@ -21,5 +21,7 @@ namespace Capstone.Models
 
         public string ImageURL { get; set; }
 
+        public string Status { get; set; }
+
     }
 }
