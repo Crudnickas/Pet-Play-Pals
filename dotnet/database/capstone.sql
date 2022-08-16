@@ -99,4 +99,9 @@ select * from playdates Where playdate_id = 1
 
 SELECT playdates.playdate_id, playdates.creator_id, playdates.play_park_address, play_park_name, playdates.play_park_location_notes, playdates.playdate_time_date FROM playdates WHERE creator_id= 1;
 
-Update user_pet_playdate SET playdate_status = 'Joined' WHERE playdate_id = 2
+Update user_pet_playdate SET playdate_status = 'Joined' WHERE playdate_id = 2;
+
+
+SELECT * from playdates Where playdate_id = @playdate_id";
+
+SELECT playdates.play_park_name, playdates.play_park_address, playdates.playdate_id, playdates.creator_id,playdates.playdate_time_date, playdates.play_park_location_notes from playdates JOIN user_pet_playdate ON playdates.playdate_id = user_pet_playdate.playdate_id WHERE user_pet_playdate.playdate_status = 'Joined';
