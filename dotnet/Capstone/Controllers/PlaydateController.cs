@@ -85,6 +85,21 @@ namespace Capstone.Controllers
             }
         }
 
+        [HttpPut("relationship/{id}")]
+        public ActionResult UpdatePlayDateStatus(int id, UserPetPlayDate userPetPlayDate)
+        {
+            int playdateId = userPetPlayDate.PlayDateID;
+            bool wasSucessful = playdateDao.UpdateUserPlayDateStatus(userPetPlayDate);
+            if (wasSucessful == true)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
     }
 
 }

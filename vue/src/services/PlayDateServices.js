@@ -17,6 +17,8 @@ export default {
   createrUserPlaydateRelationship(userpetplaydate){
     return axios.post('/playdate/relationship',userpetplaydate)
 
-  }
+  },
+
+
 
 }

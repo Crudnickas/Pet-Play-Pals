@@ -17,6 +17,8 @@ namespace Capstone.Models
         public string PlayParkLocationNotes { get; set; }
 
         public DateTime PlayDateTimeDate { get; set; }
-       
+     
+
+
     }
 }

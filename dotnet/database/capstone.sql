@@ -83,11 +83,11 @@ INSERT INTO playdates(creator_id, play_park_address, play_park_name, play_park_l
 UPDATE playdates SET playdate_time_date = '2012-02-21T18:10:00' WHERE playdate_id = 1
 UPDATE playdates SET playdate_time_date = '2012-02-21T18:10:00' WHERE playdate_id = 3
 INSERT INTO user_pet_playdate(user_id, pet_id, playdate_id, playdate_status)
-	VALUES(1, 1, 1, 'Accepted')
+	VALUES(1, 1, 1, 'Available')
 INSERT INTO user_pet_playdate(user_id, pet_id, playdate_id, playdate_status)
-	VALUES(2, 1, 2, 'Accepted')
+	VALUES(2, 1, 2, 'Available')
 	INSERT INTO user_pet_playdate(user_id, pet_id, playdate_id, playdate_status)
-	VALUES(2, 2, 3, 'Accepted')
+	VALUES(2, 2, 3, 'Available')
 GO
 select * from users
 select * from pets
@@ -97,5 +97,6 @@ select * from user_pet_playdate
 
 select * from playdates Where playdate_id = 1
 
-SELECT playdates.playdate_id, playdates.creator_id, playdates.play_park_address, play_park_name, playdates.play_park_location_notes, playdates.playdate_time_date FROM playdates WHERE creator_id= 1
-;
+SELECT playdates.playdate_id, playdates.creator_id, playdates.play_park_address, play_park_name, playdates.play_park_location_notes, playdates.playdate_time_date FROM playdates WHERE creator_id= 1;
+
+Update user_pet_playdate SET playdate_status = 'Joined' WHERE playdate_id = 2
