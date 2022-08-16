@@ -173,8 +173,9 @@ namespace Capstone.DAO
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("Update user_pet_playdate SET playdate_status = 'Joined' WHERE playdate_id = @playdate_id;", conn);
+                    SqlCommand cmd = new SqlCommand("Update user_pet_playdate SET playdate_status = @status WHERE playdate_id = @playdate_id;", conn);
                     cmd.Parameters.AddWithValue("@playdate_id", userplaydate.PlayDateID);
+                    cmd.Parameters.AddWithValue("@status", userplaydate.PlayDateStatus);
                     int numberOfRows = cmd.ExecuteNonQuery();
                     if (numberOfRows > 0)
                     {

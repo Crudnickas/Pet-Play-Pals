@@ -1,5 +1,20 @@
 <template>
 <div>
+    <div id="selectYourPet">
+ <label id="petDropDownLabel" for="petdropdown" class="sr-only">Select pets to Join playdate:  </label>
+
+   <multiselect id ="multiselectTempDropdown"
+          v-model=" selectedPetArray"
+          @select="changingArrayToString"
+          @close="changingArrayToString"
+          :options="pets"
+          label="name"
+          :multiple="true"
+          track-by="name"
+          :close-on-select="false"
+         >
+          </multiselect>
+    </div>
      <div id="playdates-container">
     <h1>Select a PlayDate to Join:</h1>
        <div id="playdate-div" v-for="playDate in playDate" v-bind:key="playDate.Id">
@@ -9,7 +24,7 @@
         <b>Location:</b> {{playDate.playParkName}} ({{playDate.playParkAddress}})<br>
         <b>Location Notes:</b> {{playDate.playParkLocationNotes}}
         <br>
-    <button id= "joindatebutton" type="submit" v-on:click.prevent="submitPlaydate">Join Play Date</button>&nbsp;
+    <button id= "joindatebutton" type="submit" v-on:click.prevent="UpdatingStatusofPlayDateToJoined(playDate.playDateID)">Join Play Date</button>&nbsp;
 
     </div>
 </div>
@@ -18,9 +33,14 @@
 </template>
 
 <script>
+import Multiselect from 'vue-multiselect'
 import PlayDateServices from '../services/PlayDateServices'
+import PetService from '../services/PetService';
 export default {
     name: "available-play-date-details",
+    components:{
+         Multiselect
+    },
     data(){
         return{
           playDate: [
@@ -36,10 +56,55 @@ export default {
                 
             }
               ],
-              playdatestatus: 'Available'
+              playdatestatus: 'Available',
+            playDateRelationshipToPut: {
+                userID: 0,
+                playDateID: 0,
+                petID: 0,
+                playDateStatus: "Joined"
+            },
+            selectedPetArray:[],
+            pets: [
+                { petId: 0,
+                name: "",
+                age: "",
+                size: "",
+                breed: "",
+                temperament: "",
+                energy: "",
+                bio: "" }
+            ],
               
         }
 
+    },
+    methods:{
+        UpdatingStatusofPlayDateToJoined(playDateID){
+            this.playDateRelationshipToPut.playDateID = playDateID;
+            PlayDateServices.updateUserPlayDateStatus(this.playDateRelationshipToPut)
+            .then((response)=> {
+                if(response.status === 200) {
+                    alert("You have joined");
+                     this.$router.push({
+                path: '/',
+                });
+                }
+
+        })
+        .catch((error)=>{
+        const response = error.response;
+        if(response.status === 404){
+          this.errorMessage=error.message;
+        }
+              });
+
+
+    },
+        changingArrayToString(){
+        this.pets.name=this.selectedPetArray.join(',');
+      
+    },
+    
     },
     created() {
     PlayDateServices.getPlayDatesByStatus(this.playdatestatus).then(response => {
@@ -47,7 +112,16 @@ export default {
           return element.creatorID != this.$store.state.user.userId;
       });
     });
-    }
+        PetService.getPets(this.$store.state.user.userId).then(response => {
+      this.pets = response.data;
+       this.playDate.creatorID = this.$store.state.user.userId;
+        this.userPetPlaydateRelationship.userID = this.$store.state.user.userId;
+    });
+  
+
+},
+    
+    
 
 }
 </script>
@@ -58,7 +132,7 @@ export default {
     color: #F0EEE4;
     margin: 20px 20px;
     width: 700px;
-    text-align: left;
+    text-align: center;
     padding: 15px;
 }
 #thumbnail-div {
