@@ -10,6 +10,8 @@ import PlayDates from '../views/PlayDates.vue'
 import FileUpload from '../components/FileUpload.vue'
 import ScheduledPlayDatesDetail from '../components/ScheduledPlayDatesDetail.vue'
 import MapView from '../views/MapView.vue'
+import AvailablePlayDates from '../views/AvailablePlayDates.vue'
+
 
 Vue.use(Router)
 
@@ -96,7 +98,16 @@ const router = new Router({
       component: ScheduledPlayDatesDetail,
       meta: {
         requiresAuth: true
-      },
+      }
+    },
+      {
+      path: "/availableplaydate",
+      name: "available-playDates",
+      component: AvailablePlayDates,
+      meta: {
+        requiresAuth: true
+      }
+      
     }
 
   ]

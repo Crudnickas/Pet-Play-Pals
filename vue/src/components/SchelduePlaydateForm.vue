@@ -115,7 +115,7 @@ data(){
       userID: 0,
       playDateID: 0,
       petID: 0,
-      playDateStatus: "Pending"
+      playDateStatus: "Available"
       }
      
     
@@ -156,6 +156,7 @@ methods:{
         alert("Your Playdate was successfully added! ")
           this.$router.push({
                 path: '/',
+               
 
               });
         

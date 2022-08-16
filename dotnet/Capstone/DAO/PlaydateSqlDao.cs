@@ -165,6 +165,31 @@ namespace Capstone.DAO
             return isSucessful;
         }
 
+        public bool UpdateUserPlayDateStatus(UserPetPlayDate userplaydate)
+        {
+            bool isSucessful = false;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("Update user_pet_playdate SET playdate_status = 'Joined' WHERE playdate_id = @playdate_id;", conn);
+                    cmd.Parameters.AddWithValue("@playdate_id", userplaydate.PlayDateID);
+                    int numberOfRows = cmd.ExecuteNonQuery();
+                    if (numberOfRows > 0)
+                    {
+                        isSucessful = true;
+                    }
+                }
+
+               
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            return isSucessful;
+        }
 
 
 
