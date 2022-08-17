@@ -87,7 +87,7 @@ export default {
     methods:{
         UpdatingStatusofPlayDateToJoined(playDateID){
             if(this.selectedPetArray.length == 0) {
-                alert("Please select one or more pets please!");
+                alert("Please select one or more pets to Join!");
                 return;
             }
             this.playDateRelationshipToPut.playDateID = playDateID;
