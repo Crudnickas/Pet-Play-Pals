@@ -6,7 +6,7 @@
         <h3 style="text-align:center"><b>Status:</b> <b>{{playDate.status}}</b></h3>
         <div id="thumbnail-div"><img id="thumbnail" :src="playDate.imageURL"><br>
         <b>{{playDate.petName}}</b></div>
-        <b>Date & Time:</b> {{playDate.playDateTimeDate}}<br>
+        <b>Date & Time:</b> {{formatDate(playDate.playDateTimeDate)}}<br>
         <b>Location:</b> {{playDate.playParkName}} ({{playDate.playParkAddress}})<br>
         <b>Location Notes:</b> {{playDate.playParkLocationNotes}}<br>
         <button class="cancelbutton" type="cancel" v-show="playDate.status!='Cancelled'" v-on:click.prevent="UpdatingStatusofPlayDateToCancel(playDate.playDateID)">Cancel Playdate</button>
@@ -60,7 +60,24 @@ export default {
     }
             })
             ;
-       }
+       },
+          formatDate(dateToBeFormatted) {
+        const date = new Date(dateToBeFormatted);
+        let suffix = date.getHours() >= 12 ? "PM" : "AM";
+        let hours = ((date.getHours()) % 12)
+        if(hours===0) {
+            hours = 12;
+        }
+        let minutes = date.getMinutes();
+        let stringMinutes = "";
+        if (minutes < 10) {
+            stringMinutes = "0"+minutes; 
+        } else {
+            stringMinutes = minutes;
+        }
+        return `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()} @ ${hours}:${stringMinutes} ${suffix}`;
+        // getHours()}:${date.getMinutes()}:${date.getSeconds()}`; ${date.getHours()}
+    }
     },
     created() {
     PlayDateServices.getPlayDatesByUser(this.$store.state.user.userId).then(response => {
