@@ -132,7 +132,7 @@ methods:{
 
     submitPlaydate(){
         if(this.selectedPetArray.length == 0) {
-            alert("Please select one or more pets please!");
+            alert("Please select one or more pets!");
             return;
         }
       this.creatorID = this.$store.state.user.userId;

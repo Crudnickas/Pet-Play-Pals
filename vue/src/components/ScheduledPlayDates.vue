@@ -12,7 +12,7 @@
     </div>
     <br><br><br>
     <div id="see-all-link">
-        <router-link v-bind:to="{ name: 'playdates' }">Click Here to see All Playdates</router-link>
+        <router-link v-bind:to="{ name: 'playdates' }">Click Here to see All Playdates or Schedule a Playdate</router-link>
         <br>
         <router-link v-bind:to="{name: 'available-playDates'}"> Click Here to Browse Available Playdates</router-link>
     </div>
@@ -30,6 +30,7 @@ data(){
         playDate: [
             {
                 playDateId:0,
+                 imageURL: "",
                 creatorId:0,
                 petName:"",
                 playParkAddress:"",

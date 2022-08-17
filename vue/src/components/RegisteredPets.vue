@@ -8,7 +8,7 @@
     <div id="pets" v-show="!noPets">
     <div id="pet" v-for="pet in pet" v-bind:key="pet.petId"><img id="thumbnail" :src="pet.imageURL"><br><b><em>{{pet.name}},</em></b> {{pet.breed}} ({{pet.age}})<br><br></div>
     </div>
-    <p><router-link v-bind:to="{ name: 'addpet' }">Click here to add a pet</router-link></p>
+    <p style: color=#F0EEE4><router-link v-bind:to="{ name: 'addpet' }">Click here to add a pet</router-link></p>
 </div>  
 </template>
 
@@ -50,7 +50,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 #reg-pets {
   display: flex;
   flex-direction: row;
@@ -66,5 +66,14 @@ export default {
 #thumbnail {
   height: 100px;
   width: auto;
+}
+a:link{
+  color:#F0EEE4;
+}
+a:visited{
+ color:rgb(78, 41, 14)
+}
+img{
+  border-radius: 50%;
 }
 </style>

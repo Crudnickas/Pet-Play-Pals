@@ -65,7 +65,7 @@ export default {
     PlayDateServices.getPlayDatesByUser(this.$store.state.user.userId).then(response => {
       this.playDate = response.data;
        if(!(this.playDate.length === 0)) {
-         this.noPlayDate = false;
+         this.noPlayDates = false;
        }
     //   this.isLoading = false;
     });

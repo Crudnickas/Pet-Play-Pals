@@ -87,7 +87,7 @@ export default {
 
 </script>
 
-<style>
+<style >
 #pet {
   margin: 20px;
 }
