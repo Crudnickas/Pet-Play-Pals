@@ -98,6 +98,43 @@ namespace Capstone.DAO
             returnPet = GetPetByPetId(newPetId);
             return returnPet;
         }
+
+
+        public bool UpdatePet(Pet updatedPet)
+        {
+            bool isSucessful = false;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("Update pets SET name = @name, age = @age, size = @size, breed = @breed, temperament = @temperament, energy = @energy, bio = @bio, image_url = @image_url  WHERE pet_id = @pet_id;", conn);
+                    cmd.Parameters.AddWithValue("@name", updatedPet.Name);
+                    cmd.Parameters.AddWithValue("@age", updatedPet.Age);
+                    cmd.Parameters.AddWithValue("@size", updatedPet.Size);
+                    cmd.Parameters.AddWithValue("@breed", updatedPet.Breed);
+                    cmd.Parameters.AddWithValue("@temperament", updatedPet.Temperament);
+                    cmd.Parameters.AddWithValue("@energy", updatedPet.Energy);
+                    cmd.Parameters.AddWithValue("@bio", updatedPet.Bio);
+                    cmd.Parameters.AddWithValue("@image_url", updatedPet.ImageURL);
+                    cmd.Parameters.AddWithValue("@pet_id", updatedPet.PetId);
+
+                    int numberOfRows = cmd.ExecuteNonQuery();
+                    if (numberOfRows > 0)
+                    {
+                        isSucessful = true;
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            return isSucessful;
+        }
+ 
+
         public bool CreatePetUser(int userId, int petId)
         {
             bool isSucessful = false;
@@ -125,6 +162,7 @@ namespace Capstone.DAO
 
             return isSucessful;
         }
+
         private Pet GetPetFromReader (SqlDataReader reader)
         {
             Pet p = new Pet()
