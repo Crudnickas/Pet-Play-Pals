@@ -58,6 +58,10 @@ export default {
   width: 500px;
 }
 
+#pets {
+    justify-content: center;
+}
+
 #isLoading > img {
   height: 100px;
   width: auto;

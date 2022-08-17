@@ -9,7 +9,7 @@
         <b>Date & Time:</b> {{playDate.playDateTimeDate}}<br>
         <b>Location:</b> {{playDate.playParkName}} ({{playDate.playParkAddress}})<br>
         <b>Location Notes:</b> {{playDate.playParkLocationNotes}}<br>
-        <button class="cancelbutton" type="cancel" v-on:click.prevent="UpdatingStatusofPlayDateToCancel(playDate.playDateID)">Cancel Playdate</button>
+        <button class="cancelbutton" type="cancel" v-show="playDate.status!='Cancelled'" v-on:click.prevent="UpdatingStatusofPlayDateToCancel(playDate.playDateID)">Cancel Playdate</button>
        
 
     </div>
@@ -58,7 +58,8 @@ export default {
                          });
 
     }
-            });
+            })
+            ;
        }
     },
     created() {

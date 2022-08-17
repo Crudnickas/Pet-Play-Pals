@@ -2,11 +2,11 @@
 <div>
   <global-menu/>
 
-    <div><h1>User Profile</h1></div>
+    <div v-show="false"><h1>User Profile</h1></div>
  
     <div id="profile-components">
     
-        <div id="user">
+        <div v-show="false" id="user">
         <user/>
         </div>
         
