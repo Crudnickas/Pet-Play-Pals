@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "vue-multiselect": "^2.1.6"
+    "vue-multiselect": "^2.1.6",
+    "vue2-datepicker": "^3.11.0"
   }
 }
