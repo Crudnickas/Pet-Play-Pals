@@ -5,7 +5,7 @@
           <gmap-map
       :center="center"
       :zoom="mapZoom"
-       :options="{minZoom: 10, maxZoom: 15}"
+       :options="{minZoom: 9, maxZoom: 11}"
       style="width:100%;  height: 555px;">
       <gmap-marker
         :key="index"
@@ -13,7 +13,7 @@
         :position="gmp"
         @click="center=gmp; currentMarker = gmp.label; currentMarkerNotes = gmp.notes; mapZoom = 12"
 
-        :label="{text: gmp.label, color: 'blue', fontWeight: 'bold'}"
+        :label="{text: gmp.label, color: 'black', fontWeight: 'bold'}"
         
       ></gmap-marker>
     </gmap-map>
@@ -43,7 +43,10 @@ data() {
       testPlace: "",
       currentMarker: "None-Selected",
       currentMarkerNotes: "",
-      mapZoom: 12
+      mapZoom: 11,
+      style: {
+        
+      }
     };
   },
  created() {

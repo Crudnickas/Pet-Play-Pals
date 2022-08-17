@@ -23,6 +23,8 @@ export default {
 </script>
 
 <style>
-
+img{
+  border-radius: 0%;
+}
 
 </style>
