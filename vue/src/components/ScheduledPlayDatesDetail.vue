@@ -1,6 +1,7 @@
 <template>
     <div id="playdates-container">
     <h1>Your Playdates</h1>
+    <div id="no-playdates-div" v-show="noPlayDates">You Currently Have No Playdates</div>
     <div id="playdate-div" v-for="playDate in playDate" v-bind:key="playDate.Id">
         <h3 style="text-align:center"><b>Status:</b> <b>{{playDate.status}}</b></h3>
         <div id="thumbnail-div"><img id="thumbnail" :src="playDate.imageURL"><br>
@@ -42,6 +43,7 @@ export default {
                 petID: 0,
                 playDateStatus: "Cancelled"
             },
+        noPlayDates: true
         }
     },
     methods:{
@@ -62,9 +64,9 @@ export default {
     created() {
     PlayDateServices.getPlayDatesByUser(this.$store.state.user.userId).then(response => {
       this.playDate = response.data;
-    //   if(!(this.playDates.length === 0)) {
-    //     this.noPlayDate = false;
-    //   }
+       if(!(this.playDate.length === 0)) {
+         this.noPlayDate = false;
+       }
     //   this.isLoading = false;
     });
   }
@@ -82,7 +84,7 @@ export default {
    
 
 }
-#playdate-div {
+#playdate-div, #no-playdates-div {
     background-color: #878357;
     color: #F0EEE4;
     margin: 20px 20px;
@@ -90,6 +92,11 @@ export default {
     text-align: left;
     padding: 15px;
 }
+
+#no-playdates-div {
+    text-align: center;
+}
+
 #thumbnail-div {
     text-align: center;
 }

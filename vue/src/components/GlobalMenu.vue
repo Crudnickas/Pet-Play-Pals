@@ -102,7 +102,7 @@ a:link {
   color: #878357
 }
 a:visited {
-  color:rgb(78, 41, 14)
+  color: #878357;
 }
 #body {
   padding-right: 200px;
