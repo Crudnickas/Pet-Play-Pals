@@ -79,6 +79,7 @@ export default {
       PetService.updatePet(pet).then(response => {
         if(response.status === 200) {
           alert(`Successully Updated ${pet.name}`)
+          this.$router.push({path: '/'});
         }
       });
     }
