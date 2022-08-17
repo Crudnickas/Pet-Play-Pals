@@ -169,6 +169,7 @@ export default {
 #thumbnail {
     height: 100px;
     width: auto;
+    border-radius: 50%;
 }
 
 
