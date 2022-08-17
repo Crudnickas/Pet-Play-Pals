@@ -5,7 +5,7 @@
         <div id="isLoading" v-if="isLoading"><img src="https://c.tenor.com/qmg1JQ82uWAAAAAj/oxo-perros-cute.gif" /></div>
         <div id="noPlayDate" v-show="noPlayDate">You currently have no scheduled Playdates</div>
         <div v-show="!noPlayDate">
-        <div v-for="pd in playDate" v-bind:key="pd.Id"><b><em>{{pd.playParkName}},</em></b> {{formatDate(pd.playDateTimeDate)}} ({{pd.petName}})
+        <div v-for="pd in displayPlaydates" v-bind:key="pd.Id"><b><em>{{pd.playParkName}},</em></b> {{formatDate(pd.playDateTimeDate)}} ({{pd.petName}})
         <!-- {{pd.playDateTimeDate}}  -->
     
         </div>
@@ -47,6 +47,11 @@ data(){
         isLoading: false
     }
 
+},
+computed:{
+    displayPlaydates(){
+        return this.playDate;
+    }
 },
   created() {
     PlayDateServices.getPlayDatesByUser(this.$store.state.user.userId).then(response => {
