@@ -10,7 +10,7 @@ export default {
     return axios.get(`/pet/userid/${userID}`); //this returns a Promise object
   },
   createPet(pet){
-    return axios.put('/pet', pet);
+    return axios.post('/pet', pet);
   },
   createPetRelationship(relationship){
     return axios.post('/relationship', relationship);
