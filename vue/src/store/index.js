@@ -28,6 +28,7 @@ export default new Vuex.Store({
     userRegisteredPets: [],
     petToPost: {},
     usernameToPost: "",
+    currentLocation: {},
     playDateLocations: [
       {
         PlayParkName: "Peppy Paws Pooch Park, LLC",
@@ -183,6 +184,9 @@ export default new Vuex.Store({
 
   },
   mutations: {
+    SET_CURRENT_LOCATION(state, location){
+      state.currentLocation = location;
+    },
     SET_AUTH_TOKEN(state, token) {
       state.token = token;
       localStorage.setItem('token', token);
