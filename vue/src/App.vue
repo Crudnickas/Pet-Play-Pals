@@ -24,11 +24,11 @@ cursor: url(https://cur.cursors-4u.net/nature/nat-8/nat738.cur), default !import
 
 
 a:link {
-  color: #878357
+  color: #F0EEE4;
   
 }
 a:visited{
-color:rgb(78, 41, 14)
+color:#F0EEE4;
 }
 img{
   border-radius: 50%;

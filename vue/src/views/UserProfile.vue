@@ -44,7 +44,7 @@ export default {
 }
 
 #user, #registered-pets-detail {
-  background-color: #878357;
+  background-color: rgb(137, 155, 83);
   color: white;
   min-width: 500px;
   min-height: 150px;

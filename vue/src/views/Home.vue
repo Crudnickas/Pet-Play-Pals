@@ -49,7 +49,7 @@ export default {
 }
 
 #registered-pets, #scheduled-playdates {
-  background-color: #878357;
+  background-color: rgb(137, 155, 83);;
   color: white;
   width: 500px;
   margin: 75px;

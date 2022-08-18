@@ -94,7 +94,7 @@ a:link {
     font-weight: bold;
 }
 a:visited{
-    color:rgb(78, 41, 14)
+    color:#F0EEE4;
 }
 
 #bacon-salad {

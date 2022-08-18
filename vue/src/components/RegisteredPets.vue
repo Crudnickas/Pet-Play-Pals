@@ -74,7 +74,7 @@ a:link{
   color:#F0EEE4;
 }
 a:visited{
- color:rgb(78, 41, 14)
+ color:#F0EEE4;
 }
 img{
   border-radius: 50%;

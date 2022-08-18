@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-  <div id="menu">
+  <div id="menu" v-show= !login>
   <img v-on:click="showHideMenu" src="..\assets\hamburger-menu-icon.png" id="menu-icon">
   <div id="menu-list" v-if="showForm">
     <h2><router-link v-bind:to="{ name: 'home' }">HOME</router-link></h2>
@@ -17,13 +17,17 @@
 
     <div class="home">
 
-
-    <h1 class="h3 mb-3 font-weight-normal" v-show="homePage">Welcome To Pet Play Pals!</h1>
-    
+      
+    <h1 class="h3 mb-3 font-weight-normal" v-show="homePage||login">Welcome To Pet Play Pals!</h1>
+    <div  v-show="!homePage&&!login">
+      <p></p>
+      <br>
+    </div>
     <img src="..\assets\PawPrint.png" id="paw-print"><br>
   
+  
   </div>
-  <div id="user-profile">
+  <div id="user-profile" v-show= !login>
     <img src="..\assets\userprofileicon.jpg" id="user-profile-icon">
     Welcome, <i>{{this.$store.state.user.username}}</i>!
     </div>
@@ -38,7 +42,8 @@ export default {
       showForm: false
       }
     },
-  props: ['homePage'], 
+  props: ['homePage','login'], 
+
   methods: {
     showHideMenu() {
       this.showForm = !this.showForm;
@@ -79,7 +84,8 @@ export default {
   margin-top: 0px;
   height:50px;
   width: auto;
-  border-radius: 40%;
+  border-radius: 20%;
+  margin-bottom: 20px;
 }
 #app > div > div.main > div.home
 {
@@ -87,14 +93,15 @@ export default {
     background-repeat:no-repeat;
     opacity: .75;
      grid-area: home;
+     background-size: cover;
 }
-#home {
+/* #home {
   
  
   padding-left:0px;
   margin-left: 0px;
 
-}
+} */
 #user-profile{
  grid-area: welcome;
  display: flex;
