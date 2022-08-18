@@ -112,7 +112,7 @@ export default {
       
           
         });
-                    alert("You have joined");
+                    alert("You have successfully joined the playdate!");
                      this.$router.push({
                 path: '/',
                 });
