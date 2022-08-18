@@ -1,8 +1,8 @@
 <template>
+<div id = "globalmenu">
+   <global-menu :login="true"/>
   <div id="register" class="text-center">
     <form class="form-register" @submit.prevent="register">
-      <h1 class="h3 mb-3 font-weight-normal">Welcome To Pet Play Pals!</h1>
-      <img src="..\assets\PawPrint.png" id="paw-print" />
       <h2>Register your account to find play dates now.</h2>
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
@@ -60,17 +60,20 @@
       <router-link :to="{ name: 'login' }">Have an account?</router-link>
     </form>
   </div>
+  </div>
 </template>
 
 <script>
 import authService from "../services/AuthService";
 import petRegister from "../components/PetRegister.vue";
 import PetService from "../services/PetService";
+import GlobalMenu from "../components/GlobalMenu.vue";
 
 export default {
   name: "register",
   components: {
     petRegister,
+    GlobalMenu
   },
   data() {
     return {

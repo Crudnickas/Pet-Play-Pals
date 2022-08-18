@@ -1,13 +1,13 @@
 <template>
   <div class="main">
-  <div id="menu">
+  <div id="menu" v-show= !login>
   <img v-on:click="showHideMenu" src="..\assets\hamburger-menu-icon.png" id="menu-icon">
   <div id="menu-list" v-if="showForm">
     <h2><router-link v-bind:to="{ name: 'home' }">HOME</router-link></h2>
     <h2><router-link v-bind:to="{ name: 'addpet' }">REGISTER A PET</router-link></h2>
-    <h2><router-link v-bind:to="{ name: 'user-profile' }">USER PROFILE</router-link></h2>
-    <h2><router-link v-bind:to="{ name: 'playdates' }">PLAYDATES</router-link></h2>
-    <h2><router-link v-bind:to="{name:'available-playDates'}">BROWSE AVAILABLE PLAYDATES</router-link></h2>
+    <h2><router-link v-bind:to="{ name: 'user-profile' }">PET PROFILE</router-link></h2>
+    <h2><router-link v-bind:to="{ name: 'playdates' }">SCHEDULED PLAYDATES</router-link></h2>
+    <h2><router-link v-bind:to="{name:'available-playDates'}">AVAILABLE PLAYDATES</router-link></h2>
     <h2><router-link v-bind:to="{ name: 'map' }">MAP</router-link></h2>
     <h2><router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">LOGOUT</router-link></h2>
     </div>
@@ -16,19 +16,21 @@
 
 
     <div class="home">
-    <div id="menu-user-profile">
-    <div id="user-profile">
+
+      
+    <h1 class="h3 mb-3 font-weight-normal" v-show="homePage||login">Welcome To Pet Play Pals!</h1>
+    <div  v-show="!homePage&&!login">
+      <p></p>
+      <br>
+    </div>
+    <img src="..\assets\PawPrint.png" id="paw-print"><br>
+  
+  
+  </div>
+  <div id="user-profile" v-show= !login>
     <img src="..\assets\userprofileicon.jpg" id="user-profile-icon">
     Welcome, <i>{{this.$store.state.user.username}}</i>!
     </div>
-    </div>
-
-    <div id="body">
-    <h1 class="h3 mb-3 font-weight-normal" v-show="homePage">Welcome To Pet Play Pals!</h1>
-    
-    <img src="..\assets\PawPrint.png" id="paw-print"><br>
-    </div>
-  </div>
   </div>
 </template>
 
@@ -40,7 +42,8 @@ export default {
       showForm: false
       }
     },
-  props: ['homePage'], 
+  props: ['homePage','login'], 
+
   methods: {
     showHideMenu() {
       this.showForm = !this.showForm;
@@ -52,10 +55,18 @@ export default {
 <style>
 #app > div > div.main {
   display: grid;
-  grid-template-columns: 200px 3fr;
+  grid-template-columns:1fr 3fr 1fr ;
   grid-template-areas:
-    "menu home";
+    "menu home welcome";
+ 
 }
+#app > div > div.main > div.home > h1
+{
+ color: #F0EEE4;
+    font-weight: bold;
+    text-shadow: black 2px 2px;
+}
+
 #menu {
   grid-area: menu;
   display: flex;
@@ -68,19 +79,37 @@ export default {
   padding-top: 0px;
   margin-top: 0px;
 }
+
 #paw-print {
   margin-top: 0px;
-  height:400px;
+  height:50px;
   width: auto;
+  border-radius: 20%;
+  margin-bottom: 20px;
 }
-#home {
-  grid-area: home;
+#app > div > div.main > div.home
+{
+  background-image: url("../assets/grassbackgroundcropped2.jpg") !important;
+    background-repeat:no-repeat;
+    opacity: .75;
+     grid-area: home;
+     background-size: cover;
+}
+/* #home {
+  
+ 
   padding-left:0px;
   margin-left: 0px;
+
+} */
+#user-profile{
+ grid-area: welcome;
+ display: flex;
+ justify-content: flex-end;
 }
 #menu-user-profile {
   display: flex;
-  justify-content: flex-end;
+  
 }
 #menu-icon {
   height: 50px;
@@ -92,12 +121,9 @@ export default {
 #user-profile-icon {
   height: 50px;
   width: auto;
+ 
 }
-#body > h1 {
-  margin: 0px;
-  margin-top: -50px;
-  padding: 0px;
-}
+
 a:link {
   color: #878357
 }

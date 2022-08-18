@@ -175,7 +175,7 @@ export default {
 
 <style scoped>
 #playdate-div {
-    background-color: #878357;
+    background-color: rgb(137, 155, 83);;
     color: #F0EEE4;
     margin: 20px 20px;
     width: 700px;
