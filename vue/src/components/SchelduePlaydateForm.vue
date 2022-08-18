@@ -135,6 +135,10 @@ methods:{
             alert("Please select one or more pets!");
             return;
         }
+        if(this.SelectedName == "") {
+          alert("Please select a location!");
+            return;
+        }
       this.creatorID = this.$store.state.user.userId;
       PlayDateServices.createPlayDate(this.playDate)
       .then((response)=> {
@@ -157,6 +161,7 @@ methods:{
       
           
         });
+        this.$store.commit("SET_CURRENT_LOCATION", {})
         alert("Your Playdate was successfully added! ")
           this.$router.push({
                 path: '/',
@@ -192,6 +197,8 @@ methods:{
       this.playDate = {};
       this.SelectedName ="";
       this.selectedPetArray= [];
+      this.$store.commit("SET_CURRENT_LOCATION", {})
+
     },
  
 
@@ -202,7 +209,18 @@ methods:{
        this.playDate.creatorID = this.$store.state.user.userId;
         this.userPetPlaydateRelationship.userID = this.$store.state.user.userId;
     });
-  
+    if(Object.keys(this.$store.state.currentLocation).length !== 0) {
+    this.SelectedName = this.$store.state.currentLocation.label;
+     this.SelectedLocation = this.$store.state.playDateLocations.filter((element)=> {
+       return element.PlayParkName == this.SelectedName;
+
+      })
+      this.playDate.playParkAddress = this.SelectedLocation[0].PlayParkAddress;
+      console.log(this.SelectedLocation[0].PlayParkAddress)
+      this.playDate.playParkName = this.SelectedLocation[0].PlayParkName;
+      this.playDate.playParkLocationNotes = this.SelectedLocation[0].PlayParkLocationNotes;
+    }
+
 
 },
 

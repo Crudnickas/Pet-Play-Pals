@@ -1,7 +1,6 @@
 <template>
   <div>
       <h3>{{currentMarker}}</h3>
-      <h4>{{currentMarkerNotes}}</h4>
           <gmap-map
       :center="center"
       :zoom="mapZoom"
@@ -11,11 +10,22 @@
         :key="index"
         v-for="(gmp, index) in locations"
         :position="gmp"
-        @click="center=gmp; currentMarker = gmp.label; currentMarkerNotes = gmp.notes; mapZoom = 12"
+        @click="center=gmp; currentMarker = gmp.label; currentMarkerNotes = gmp.notes; mapZoom = 12; infoWinOpen = true; infoContent= gmp.notes; currentLocation = gmp"
 
         :label="{text: gmp.label, color: 'black', fontWeight: 'bold'}"
         
       ></gmap-marker>
+      <gmap-info-window
+        :options="infoOptions"
+        :position="center"
+        :opened="infoWinOpen"
+        @closeclick="infoWinOpen=false"
+      >
+        <div v-html="infoContent">
+
+        </div>
+        <button v-on:click="buttonClicked(currentLocation)">Click here to start a playdate!</button>
+      </gmap-info-window>
     </gmap-map>
     <input type="text" v-model="testPlace" placeholder="Enter Address or City,State">
     <input type ="button" value="Go to Location" @click="alertFromAddress(testPlace)">
@@ -35,7 +45,7 @@ data() {
           lng: -100.4458825 
       },
       locations: [],
-      currentLocation: null,
+      currentLocation: {},
       latAndLong: {
           lat: 0,
           lng: 0
@@ -46,8 +56,17 @@ data() {
       mapZoom: 11,
       style: {
         
-      }
-    };
+      },
+      infoContent: '',
+      infoWinOpen: false,
+      infoOptions: {
+          pixelOffset: {
+            width: 0,
+            height: -35
+          }
+      
+    }
+    }
   },
  created() {
      
@@ -64,7 +83,11 @@ data() {
   },
  
   methods: {
+    buttonClicked(location){
+      this.$store.commit("SET_CURRENT_LOCATION", location)
+      this.$router.push({path: '/playdates'});
 
+    },
     alertFromAddress(address){
          googleService.getLatLongFromAddress(address)
       .then((response) => {
